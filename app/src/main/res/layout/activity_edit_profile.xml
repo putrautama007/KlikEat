@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileActivity"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#fff"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:id="@+id/rv_1" >
+
+        <ImageView
+            android:id="@+id/iv_profilePicture"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/background_profile_picture"
+            android:layout_marginStart="155dp"
+            />
+        <TextView
+            android:id="@+id/tv_editPhoto"
+            android:layout_below="@+id/iv_profilePicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Foto"
+            android:textAlignment="center"
+            />
+         <TextView
+             android:id="@+id/tv_Name"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/tv_editPhoto"
+             android:layout_marginTop="30dp"
+             android:textSize="14dp"
+             android:text="Nama"/>
+        <EditText
+            android:id="@+id/et_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Name"/>
+
+        <TextView
+            android:id="@+id/tv_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_Name"
+            android:text="Tanggal Lahir"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/et_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_birthday"/>
+         <TextView
+             android:id="@+id/tv_email"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="E-mail"
+             android:layout_below="@+id/et_birthday"
+             android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_email"/>
+
+        <TextView
+            android:id="@+id/tv_phoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_email"
+            android:text="No. Telp"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/et_phoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_phoneNumber"/>
+
+        <TextView
+            android:id="@+id/tv_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_phoneNumber"
+            android:layout_marginTop="20dp"
+            android:text="Jenis Kelamin"/>
+        <RadioButton
+            android:id="@+id/rb_boy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_gender"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_boy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pria"
+            android:layout_toRightOf="@+id/rb_boy"
+            android:layout_below="@id/tv_gender"
+            android:layout_marginTop="15dp"/>
+        <RadioButton
+            android:id="@+id/rb_girl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_gender"
+            android:layout_toRightOf="@+id/tv_boy"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_girl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_gender"
+            android:text="Wanita"
+            android:layout_toRightOf="@id/rb_girl"
+            android:layout_marginTop="15dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/rv_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#fff"
+        android:elevation="4dp"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat"/>
+
+        
+
+    </RelativeLayout>
+
+</RelativeLayout>

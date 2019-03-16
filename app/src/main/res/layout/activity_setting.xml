@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_Akun"
+            android:text="Akun"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/colorBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_editProfil"
+            android:layout_below="@+id/tv_Akun"
+            android:layout_marginStart="20dp"
+            android:text="Edit Profil"
+            android:background="#fff"
+            android:textAlignment="textStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_editPassword"
+            android:text="Edit Password"
+            android:layout_marginStart="20dp"
+            android:background="#fff"
+            android:textAlignment="textStart"
+            android:layout_below="@+id/btn_editProfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/btn_editPassword"
+            android:background="#000"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_Version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/v_line"
+            android:background="#fff"
+            android:text="Versi"
+            android:textAlignment="textStart"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"/>
+
+        <Button
+            android:id="@+id/btn_Help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_Version"
+            android:background="#fff"
+            android:textAlignment="textStart"
+            android:text="Bantuan"
+            android:layout_marginStart="20dp"/>
+        <Button
+            android:id="@+id/btn_Faq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_Help"
+            android:background="#fff"
+            android:text="FaQ"
+            android:textAlignment="textStart"
+            android:layout_marginStart="20dp"/>
+        <Button
+            android:id="@+id/btn_About"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_Faq"
+            android:textAlignment="textStart"
+            android:text="Tentang"
+            android:background="#fff"
+            android:layout_marginStart="20dp"/>
+    </RelativeLayout>
+
+</LinearLayout>
