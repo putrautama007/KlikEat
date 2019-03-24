@@ -1,11 +1,17 @@
 package com.klikeat.p2p.klikeat;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,10 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
+                    fragment = new HomeFragment();
+                    break;
                 case R.id.navigation_favourite:
                     mTextMessage.setText(R.string.title_favourite);
                     return true;
@@ -27,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_history);
                     return true;
                 case R.id.navigation_profile:
-                    mTextMessage.setText(R.string.title_profile);
-                    return true;
+                    fragment = new ProfileFragment();
+                    break;
             }
-            return false;
+            getSupportFragmentManager().beginTransaction().replace(R.id.your_placeholder, fragment).commit();
+            return true;
         }
     };
 
@@ -38,10 +46,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        loadFragment(new HomeFragment());
+
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.your_placeholder, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 
 }

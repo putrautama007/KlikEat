@@ -15,7 +15,7 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.app_bar);
+        getSupportActionBar().setCustomView(R.layout.app_bar_edit_profile);
         TextView title=findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         title.setText("Edit Profil");
     }

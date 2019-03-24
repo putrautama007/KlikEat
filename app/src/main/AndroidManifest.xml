@@ -12,9 +12,10 @@
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".SettingActivity" />
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" />
-        <activity android:name=".SplashScreenActivity">
+            android:name=".SplashScreenActivity"
+             />
+        <activity android:name=".MainActivity"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

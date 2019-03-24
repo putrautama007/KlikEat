@@ -14,7 +14,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.app_bar);
+        getSupportActionBar().setCustomView(R.layout.app_bar_setting);
         TextView title=findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         title.setText("Setting");
         btnImgBack= findViewById(getResources().getIdentifier("action_bar_back","id", getPackageName()));
