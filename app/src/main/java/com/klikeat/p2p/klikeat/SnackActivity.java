@@ -13,12 +13,7 @@ public class SnackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snack);
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.app_bar);
-        TextView title=findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        title.setText("Snack");
-        btnImgBack= findViewById(getResources().getIdentifier("action_bar_back","id", getPackageName()));
-        btnImgLove= findViewById(getResources().getIdentifier("action_bar_love","id", getPackageName()));
+
     }
 
 }

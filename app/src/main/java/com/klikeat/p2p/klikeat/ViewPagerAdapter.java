@@ -9,14 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class ViewPagerAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
     private Integer [] images = {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3};
 
+
+
     public ViewPagerAdapter(Context context){
         this.context = context;
+        layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -33,9 +38,8 @@ public class ViewPagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_layout, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-
-        ViewPager vp = (ViewPager) container;
-        vp.addView(view,0);
+        imageView.setImageResource(images[position]);
+        container.addView(view);
         return view;
 
 

@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new HomeFragment();
                     break;
                 case R.id.navigation_favourite:
-                    mTextMessage.setText(R.string.title_favourite);
-                    return true;
+                    fragment = new FavouriteFragment();
+                    break;
                 case R.id.navigation_history:
                     mTextMessage.setText(R.string.title_history);
                     return true;

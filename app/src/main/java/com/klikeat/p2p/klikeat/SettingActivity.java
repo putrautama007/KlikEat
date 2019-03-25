@@ -1,22 +1,29 @@
 package com.klikeat.p2p.klikeat;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SettingActivity extends AppCompatActivity {
-    private ImageView btnImgBack;
+
+    Button btnEditProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.app_bar_setting);
-        TextView title=findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        title.setText("Setting");
-        btnImgBack= findViewById(getResources().getIdentifier("action_bar_back","id", getPackageName()));
+        btnEditProfile = (Button) findViewById(R.id.btn_editProfil);
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
