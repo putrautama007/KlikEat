@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditProfileActivity"
     android:orientation="vertical"
-    android:scrollbarAlwaysDrawVerticalTrack="true">
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".EditProfileActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -23,8 +23,8 @@
             android:text="Edit Profil"
             android:textColor="@color/colorBlack"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <ImageView
             android:id="@+id/iv_backEditProfile"
             android:layout_width="wrap_content"
@@ -41,181 +41,196 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#fff"
-        android:elevation="4dp"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:id="@+id/rv_1" >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/linear_photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_profilePicture"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/background_profile_picture"
-                android:layout_gravity="center"
-                />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_editPhoto"
-            android:layout_below="@+id/linear_photo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Foto"
-            android:textAlignment="center"
-            />
-         <TextView
-             android:id="@+id/tv_Name"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_below="@+id/tv_editPhoto"
-             android:layout_marginTop="30dp"
-             android:textSize="14dp"
-             android:text="Nama"/>
-        <EditText
-            android:id="@+id/et_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_Name"/>
-
-        <TextView
-            android:id="@+id/tv_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_Name"
-            android:text="Tanggal Lahir"
-            android:layout_marginTop="10dp"/>
-        <EditText
-            android:id="@+id/et_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_birthday"/>
-         <TextView
-             android:id="@+id/tv_email"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="E-mail"
-             android:layout_below="@+id/et_birthday"
-             android:layout_marginTop="10dp"/>
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_email"/>
-
-        <TextView
-            android:id="@+id/tv_phoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_email"
-            android:text="No. Telp"
-            android:layout_marginTop="10dp"/>
-        <EditText
-            android:id="@+id/et_phoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_phoneNumber"/>
-
-        <TextView
-            android:id="@+id/tv_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_phoneNumber"
-            android:layout_marginTop="20dp"
-            android:text="Jenis Kelamin"/>
-        <RadioButton
-            android:id="@+id/rb_boy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_gender"
-            android:layout_marginTop="10dp"
-            />
-        <TextView
-            android:id="@+id/tv_boy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pria"
-            android:layout_toRightOf="@+id/rb_boy"
-            android:layout_below="@id/tv_gender"
-            android:layout_marginTop="15dp"/>
-        <RadioButton
-            android:id="@+id/rb_girl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_gender"
-            android:layout_toRightOf="@+id/tv_boy"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"/>
-
-        <TextView
-            android:id="@+id/tv_girl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_gender"
-            android:text="Wanita"
-            android:layout_toRightOf="@id/rb_girl"
-            android:layout_marginTop="15dp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_below="@+id/rv_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#fff"
-        android:elevation="4dp"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alamat"/>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/tv_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/iv_address"
-                app:srcCompat="@drawable/ic_pin_drop_orange_24dp"/>
-            <TextView
-                android:id="@+id/tv_address_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Adress"
-                android:textSize="14sp"/>
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:id="@+id/rv_1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <ImageView
-                    android:id="@+id/iv_right"
+                <LinearLayout
+                    android:id="@+id/linear_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_profilePicture"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/background_profile_picture" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_editPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_photo"
+                    android:text="Edit Foto"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tv_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_editPhoto"
+                    android:layout_marginTop="30dp"
+                    android:text="Nama"
+                    android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/et_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_Name" />
+
+                <TextView
+                    android:id="@+id/tv_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/et_Name"
+                    android:layout_marginTop="10dp"
+                    android:text="Tanggal Lahir" />
+
+                <EditText
+                    android:id="@+id/et_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_birthday" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/et_birthday"
+                    android:layout_marginTop="10dp"
+                    android:text="E-mail" />
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_email" />
+
+                <TextView
+                    android:id="@+id/tv_phoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/et_email"
+                    android:layout_marginTop="10dp"
+                    android:text="No. Telp" />
+
+                <EditText
+                    android:id="@+id/et_phoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_phoneNumber" />
+
+                <TextView
+                    android:id="@+id/tv_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/et_phoneNumber"
+                    android:layout_marginTop="20dp"
+                    android:text="Jenis Kelamin" />
+
+                <RadioButton
+                    android:id="@+id/rb_boy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/ic_chevron_right_black_24dp"/>
+                    android:layout_below="@+id/tv_gender"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_boy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_gender"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/rb_boy"
+                    android:text="Pria" />
+
+                <RadioButton
+                    android:id="@+id/rb_girl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_gender"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/tv_boy" />
+
+                <TextView
+                    android:id="@+id/tv_girl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_gender"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/rb_girl"
+                    android:text="Wanita" />
+
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_1"
+                android:layout_marginTop="20dp"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_address"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_pin_drop_orange_24dp" />
+
+                    <TextView
+                        android:id="@+id/tv_address_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Adress"
+                        android:textSize="14sp" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
-
-        
-
-    </RelativeLayout>
-
+    </ScrollView>
 </LinearLayout>

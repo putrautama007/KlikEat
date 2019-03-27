@@ -8,9 +8,9 @@
     >
 
     <ImageView android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/image_1"
+        android:layout_height="180dp"
         android:scaleType="fitXY"
+        android:src="@drawable/image_1"
         android:adjustViewBounds="true"
         android:id="@+id/imageView" />
 
