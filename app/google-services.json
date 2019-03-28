@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "942268134479",
+    "firebase_url": "https://klikeat-ff775.firebaseio.com",
+    "project_id": "klikeat-ff775",
+    "storage_bucket": "klikeat-ff775.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942268134479:android:ea9b807ac4ff668a",
+        "android_client_info": {
+          "package_name": "com.klikeat.p2p.klikeat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942268134479-cp3voruh3tlq9k5qe1p2ridsk5f60t7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABwhSM01263xalLmjWVi2fbowruOB_gYM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
