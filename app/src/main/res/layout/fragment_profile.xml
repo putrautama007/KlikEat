@@ -102,7 +102,7 @@
 
                 <LinearLayout
                     android:id="@+id/linear_penilaianSaya"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="10dp">
@@ -135,7 +135,7 @@
                 <LinearLayout
                     android:layout_below="@+id/linear_penilaianSaya"
                     android:id="@+id/linear_keranjang"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="10dp">
@@ -167,7 +167,7 @@
                 <LinearLayout
                     android:layout_below="@+id/linear_keranjang"
                     android:id="@+id/linear_komentarSaya"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="10dp">
@@ -200,7 +200,7 @@
                 <LinearLayout
                     android:layout_below="@+id/linear_komentarSaya"
                     android:id="@+id/linear_order"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="10dp">

@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new FavouriteFragment();
                     break;
                 case R.id.navigation_history:
-                    mTextMessage.setText(R.string.title_history);
-                    return true;
+                    fragment = new HistoryFragment();
+                    break;
                 case R.id.navigation_profile:
                     fragment = new ProfileFragment();
                     break;

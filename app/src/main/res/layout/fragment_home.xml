@@ -27,7 +27,7 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/round_background" />
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -69,7 +69,7 @@
                         android:id="@+id/iv_Snack"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/macarons_new_01"
+                        android:src="@drawable/macarons_new_01"
                         android:background="@drawable/round_background_white" />
 
                     <TextView
@@ -91,7 +91,7 @@
                         android:id="@+id/iv_Food"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/lauk_new_01"
+                        android:src="@drawable/lauk_new_01"
                         android:background="@drawable/round_background_white_blue" />
 
                     <TextView
@@ -113,7 +113,7 @@
                         android:id="@+id/iv_riceBox"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/lunchbox_new_01"
+                        android:src="@drawable/lunchbox_new_01"
                         android:background="@drawable/round_background_white" />
 
                     <TextView
@@ -144,7 +144,7 @@
                         android:id="@+id/btn_chiliSauce"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/saus_new_01"
+                        android:src="@drawable/saus_new_01"
                         android:background="@drawable/round_background_white" />
 
                     <TextView
@@ -167,7 +167,7 @@
                         android:id="@+id/iv_drinks"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/minuman_new_01"
+                        android:src="@drawable/minuman_new_01"
                         android:background="@drawable/round_background_white_blue" />
 
                     <TextView
@@ -189,7 +189,7 @@
                         android:id="@+id/iv_etc"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/rice_new_01"
+                        android:src="@drawable/rice_new_01"
                         android:background="@drawable/round_background_white" />
 
                     <TextView
@@ -225,16 +225,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginRight="15dp"
                     android:layout_marginBottom="30dp"
                     tools:listitem="@layout/list_popular">
-
-
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 
 </LinearLayout>

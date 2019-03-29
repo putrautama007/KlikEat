@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,10 +50,11 @@ public class HomeFragment extends Fragment {
         popularModels.add(new PopularModel("Sambal Cumi","Rp 20.000",R.drawable.ella_olsson_1184054_unsplash));
         popularModels.add(new PopularModel("Sambal Cumi Besar","Rp 30.000",R.drawable.ernest_ojeh_1348807_unsplash));
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rv_popular);
         PopularAdapter popularAdapter = new PopularAdapter(getActivity(), popularModels);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(popularAdapter);
 
 
