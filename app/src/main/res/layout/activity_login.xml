@@ -55,6 +55,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
+            android:textColor="@color/black"
             android:backgroundTint="@android:color/transparent"
             android:hint="@string/username"
             android:textSize="12sp"
@@ -98,6 +99,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
+            android:textColor="@color/black"
             android:backgroundTint="@android:color/transparent"
             android:hint="@string/password"
             android:textSize="12sp"
@@ -142,7 +144,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_sign_in"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <view
+    <LinearLayout
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -150,6 +152,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:background="#fafafa"
+        android:orientation="horizontal"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -47,7 +47,9 @@
         <Button
             android:id="@+id/btn_editProfil"
             android:layout_below="@+id/tv_Akun"
-            android:text="     Edit Profil"
+            android:text="Edit Profil"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:background="#fff"
             android:textAlignment="textStart"
 
@@ -55,7 +57,9 @@
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/btn_editPassword"
-            android:text="     Edit Password"
+            android:text="Edit Password"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:background="#fff"
             android:textAlignment="textStart"
             android:layout_below="@+id/btn_editProfil"
@@ -76,9 +80,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/v_line"
             android:background="#fff"
-            android:text="     Versi"
+            android:text="Versi"
             android:textAlignment="textStart"
-
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:layout_marginTop="5dp"/>
 
         <Button
@@ -88,7 +93,9 @@
             android:layout_below="@id/btn_Version"
             android:background="#fff"
             android:textAlignment="textStart"
-            android:text="     Bantuan"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="Bantuan"
             />
         <Button
             android:id="@+id/btn_Faq"
@@ -96,7 +103,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_Help"
             android:background="#fff"
-            android:text="     FaQ"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="FaQ"
             android:textAlignment="textStart"
             />
 
@@ -106,7 +115,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_Faq"
             android:background="#fff"
-            android:text="    Tentang"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="Tentang"
+            android:textAlignment="textStart" />
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_About"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="#fff"
+            android:text="Keluar"
             android:textAlignment="textStart" />
     </RelativeLayout>
 

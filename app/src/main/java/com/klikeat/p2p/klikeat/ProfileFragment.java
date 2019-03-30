@@ -7,15 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     ImageView ivSetting;
+    Button login,register;
+    Intent intent;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -26,17 +29,35 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        ImageView ivSetting = (ImageView) view.findViewById(R.id.iv_setting);
-        ivSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
-            }
-        });
+        ivSetting =  view.findViewById(R.id.iv_setting);
+        login = view.findViewById(R.id.btn_login);
+        register = view.findViewById(R.id.btn_register);
 
+        ivSetting.setOnClickListener(this);
+        login.setOnClickListener(this);
+        register.setOnClickListener(this);
         return view;
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_setting: {
+                intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_login : {
+                intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_register : {
+                intent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(intent);
+                break;
+            }
+        }
+    }
 }
