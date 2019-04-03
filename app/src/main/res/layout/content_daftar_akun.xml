@@ -43,6 +43,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
+            android:inputType="phone"
             android:backgroundTint="@color/colorPrimary"
             android:hint="@string/nomor_telepon"
             android:textSize="12sp"
@@ -238,7 +239,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/colorPrimary"
-            android:hint="Provinsi"
+            android:hint="Alamat detail"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -285,6 +286,7 @@
             android:text="Pria"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="16dp"
+            android:buttonTint="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -293,6 +295,7 @@
             android:text="Wanita"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="16dp"
+            android:buttonTint="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RadioGroup>

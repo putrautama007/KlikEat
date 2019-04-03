@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".HomeFragment">
+    tools:context=".fragment.HomeFragment">
 
 
     <TextView
@@ -26,6 +26,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
         android:background="@drawable/round_background" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -141,7 +142,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/btn_chiliSauce"
+                        android:id="@+id/iv_chiliSauce"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@mipmap/saus_new_01"

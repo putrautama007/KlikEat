@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f2f2f2"
-    tools:context=".ProfileFragment"
+    tools:context=".fragment.ProfileFragment"
     android:orientation="vertical">
 
     <LinearLayout
@@ -51,7 +51,7 @@
             android:elevation="4dp"
             android:orientation="vertical"
             android:padding="20dp"
-            android:id="@+id/rv_1">
+            android:id="@+id/rv_sudah_login">
             <ImageView
                 android:id="@+id/iv_profilePicture"
                 android:layout_width="64dp"
@@ -85,7 +85,7 @@
         </RelativeLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/rv_register"
+            android:id="@+id/rv_profile_belum_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFA80B"

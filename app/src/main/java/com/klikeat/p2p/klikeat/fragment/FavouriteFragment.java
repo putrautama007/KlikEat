@@ -1,4 +1,4 @@
-package com.klikeat.p2p.klikeat;
+package com.klikeat.p2p.klikeat.fragment;
 
 
 import android.os.Bundle;
@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.klikeat.p2p.klikeat.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class FavouriteFragment extends Fragment {
 
 

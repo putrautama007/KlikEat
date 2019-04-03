@@ -1,7 +1,5 @@
 package com.klikeat.p2p.klikeat;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.klikeat.p2p.klikeat.fragment.FavouriteFragment;
+import com.klikeat.p2p.klikeat.fragment.HomeFragment;
+import com.klikeat.p2p.klikeat.fragment.ProfileFragment;
 
 
 public class MainActivity extends AppCompatActivity {

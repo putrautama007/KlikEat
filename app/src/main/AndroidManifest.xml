@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.klikeat.p2p.klikeat">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -11,10 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CheckOutActivity"></activity>
+        <activity android:name=".KeranjangActivity" />
+        <activity android:name=".PenilaianActivity" />
+        <activity android:name=".DetailMakananActivity" />
         <activity
             android:name=".DaftarAkunActivity"
             android:label="@string/title_activity_daftar_akun"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".EditProfileActivity" />
@@ -29,6 +35,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" />
+        <activity android:name=".MakananActivity" />
     </application>
 
 </manifest>

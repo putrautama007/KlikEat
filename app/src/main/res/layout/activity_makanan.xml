@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SnackActivity"
+    tools:context=".MakananActivity"
     android:orientation="vertical">
 
 
@@ -27,12 +27,12 @@
             android:textStyle="bold"
             />
         <ImageView
-            android:id="@+id/iv_setting"
+            android:id="@+id/iv_backMakanan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
         <ImageView
-            android:id="@+id/iv_shop"
+            android:id="@+id/iv_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

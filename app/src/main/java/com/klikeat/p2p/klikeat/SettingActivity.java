@@ -9,21 +9,42 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SettingActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
 
-    Button btnEditProfile;
+public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Button btnEditProfile, btnLogout;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        btnEditProfile = (Button) findViewById(R.id.btn_editProfil);
-        btnEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, EditProfileActivity.class);
+        btnEditProfile = findViewById(R.id.btn_editProfil);
+        btnLogout = findViewById(R.id.btn_logout);
+
+        mAuth = FirebaseAuth.getInstance();
+        btnEditProfile.setOnClickListener(this);
+        btnLogout.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_logout :{
+                mAuth.signOut();
+                Intent intent = new Intent(SettingActivity.this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
+                break;
             }
-        });
+            case R.id.btn_editProfil : {
+                startActivity( new Intent(SettingActivity.this, EditProfileActivity.class));
+                break;
+            }
+        }
     }
 }

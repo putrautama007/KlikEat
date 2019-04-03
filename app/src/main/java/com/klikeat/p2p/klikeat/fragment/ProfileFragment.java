@@ -1,14 +1,22 @@
-package com.klikeat.p2p.klikeat;
+package com.klikeat.p2p.klikeat.fragment;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.klikeat.p2p.klikeat.LoginActivity;
+import com.klikeat.p2p.klikeat.R;
+import com.klikeat.p2p.klikeat.RegisterActivity;
+import com.klikeat.p2p.klikeat.SettingActivity;
 
 
 /**
@@ -19,6 +27,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     ImageView ivSetting;
     Button login,register;
     Intent intent;
+    ConstraintLayout clProfileBelumLogin;
+    RelativeLayout rvSudahLogin;
+    FirebaseAuth mAuth;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -32,10 +43,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         ivSetting =  view.findViewById(R.id.iv_setting);
         login = view.findViewById(R.id.btn_login);
         register = view.findViewById(R.id.btn_register);
+        clProfileBelumLogin = view.findViewById(R.id.rv_profile_belum_login);
+        rvSudahLogin = view.findViewById(R.id.rv_sudah_login);
 
         ivSetting.setOnClickListener(this);
         login.setOnClickListener(this);
         register.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            clProfileBelumLogin.setVisibility(View.INVISIBLE);
+        }else {
+            clProfileBelumLogin.setVisibility(View.VISIBLE);
+        }
+
         return view;
 
     }
