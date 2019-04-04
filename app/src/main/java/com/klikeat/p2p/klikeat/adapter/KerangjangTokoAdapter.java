@@ -23,6 +23,11 @@ public class KerangjangTokoAdapter extends RecyclerView.Adapter<KerangjangTokoAd
     List<KeranjangBelanjaTokoModel> keranjangBelanjaTokoModelList;
     KerangjangProdukAdapter kerangjangProdukAdapter;
 
+    public KerangjangTokoAdapter(Context context, List<KeranjangBelanjaTokoModel> keranjangBelanjaTokoModelList) {
+        this.context = context;
+        this.keranjangBelanjaTokoModelList = keranjangBelanjaTokoModelList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -39,10 +44,10 @@ public class KerangjangTokoAdapter extends RecyclerView.Adapter<KerangjangTokoAd
 
             }
         });
-        viewHolder.rvProdukKeranjang.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        kerangjangProdukAdapter = new KerangjangProdukAdapter(context, keranjangBelanjaTokoModelList.get(i).getKeranjangBelanjaProdukModel());
-        viewHolder.rvProdukKeranjang.setAdapter(kerangjangProdukAdapter);
-        kerangjangProdukAdapter.notifyDataSetChanged();
+//        viewHolder.rvProdukKeranjang.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+//        kerangjangProdukAdapter = new KerangjangProdukAdapter(context, keranjangBelanjaTokoModelList.get(i).getKeranjangBelanjaProdukModel());
+//        viewHolder.rvProdukKeranjang.setAdapter(kerangjangProdukAdapter);
+//        kerangjangProdukAdapter.notifyDataSetChanged();
     }
 
     @Override

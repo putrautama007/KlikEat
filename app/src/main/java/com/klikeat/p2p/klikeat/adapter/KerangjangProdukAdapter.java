@@ -16,17 +16,18 @@ import com.bumptech.glide.Glide;
 import com.klikeat.p2p.klikeat.R;
 import com.klikeat.p2p.klikeat.model.KeranjangBelanjaProdukModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KerangjangProdukAdapter extends RecyclerView.Adapter<KerangjangProdukAdapter.ViewHolder> {
     int jumlah = 0;
     Context context;
-    List<KeranjangBelanjaProdukModel> keranjangBelanjaProdukModelList;
+    ArrayList<KeranjangBelanjaProdukModel> keranjangBelanjaProdukModelList;
 
-    public KerangjangProdukAdapter(Context context, List<KeranjangBelanjaProdukModel> keranjangBelanjaProdukModelList) {
-        this.context = context;
-        this.keranjangBelanjaProdukModelList = keranjangBelanjaProdukModelList;
-    }
+//    public KerangjangProdukAdapter(Context context, KeranjangBelanjaProdukModel keranjangBelanjaProdukModelList) {
+//        this.context = context;
+//        this.keranjangBelanjaProdukModelList = keranjangBelanjaProdukModelList;
+//    }
 
     @NonNull
     @Override

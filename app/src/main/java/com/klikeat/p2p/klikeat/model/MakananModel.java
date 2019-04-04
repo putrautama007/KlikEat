@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 public class MakananModel {
     public String nama_produk,deskripsi,kategori,foto
-            ,harga,lokasi_penjual,penjual,rating,jumlahUlasan,produk_id;
+            ,harga,lokasi_penjual,penjual,rating,jumlahUlasan,produk_id,foto_penjual;
 
     ArrayList<UlasanModel> ulasan;
 
-    public MakananModel(String nama_produk, String deskripsi,
-                        String kategori, String foto, String harga,
-                        String lokasi_penjual, String penjual,
-                        String rating, String jumlahUlasan, String produk_id,
+    public MakananModel(String nama_produk, String deskripsi, String kategori, String foto,
+                        String harga, String lokasi_penjual, String penjual, String rating,
+                        String jumlahUlasan, String produk_id, String foto_penjual,
                         ArrayList<UlasanModel> ulasan) {
         this.nama_produk = nama_produk;
         this.deskripsi = deskripsi;
@@ -23,6 +22,7 @@ public class MakananModel {
         this.rating = rating;
         this.jumlahUlasan = jumlahUlasan;
         this.produk_id = produk_id;
+        this.foto_penjual = foto_penjual;
         this.ulasan = ulasan;
     }
 

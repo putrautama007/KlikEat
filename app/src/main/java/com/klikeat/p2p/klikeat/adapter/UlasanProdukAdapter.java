@@ -32,16 +32,19 @@ public class UlasanProdukAdapter extends RecyclerView.Adapter<UlasanProdukAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.namaPengulas.setText(ulasanModels.get(i).namaProfile);
-        viewHolder.isiUlasan.setText(ulasanModels.get(i).isiUlasan);
-        viewHolder.tglUlasan.setText(ulasanModels.get(i).tglUlasan);
-        viewHolder.ratingBarUlasanProduk.setRating(Float.parseFloat(ulasanModels.get(i).ratingProduk));
-
+            viewHolder.namaPengulas.setText(ulasanModels.get(i).namaProfile);
+            viewHolder.isiUlasan.setText(ulasanModels.get(i).isiUlasan);
+            viewHolder.tglUlasan.setText(ulasanModels.get(i).tglUlasan);
+            viewHolder.ratingBarUlasanProduk.setRating(Float.parseFloat(ulasanModels.get(i).ratingProduk));
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        if (ulasanModels.size() == 0){
+            return 0;
+        }else {
+            return 2;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

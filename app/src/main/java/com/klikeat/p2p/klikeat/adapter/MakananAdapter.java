@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.klikeat.p2p.klikeat.DetailMakananActivity;
 import com.klikeat.p2p.klikeat.R;
@@ -49,6 +51,7 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.ViewHold
                 context.startActivity(intent);
             }
         });
+        Glide.with(context).load(makananModels.get(i).foto).into(viewHolder.ivFotoProduk);
     }
 
     @Override
@@ -60,6 +63,7 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.ViewHold
         TextView namaProduk,namaPenjual,hargaMakanan,jumlahUlasan;
         RatingBar ratingMakanan;
         CardView cvProduk;
+        ImageView ivFotoProduk;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             namaProduk = itemView.findViewById(R.id.tv_foodName);
@@ -68,6 +72,7 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.ViewHold
             jumlahUlasan = itemView.findViewById(R.id.tv_jumlah_ulasan);
             ratingMakanan = itemView.findViewById(R.id.rating_makanan);
             cvProduk = itemView.findViewById(R.id.cv_produk);
+            ivFotoProduk = itemView.findViewById(R.id.iv_produk);
         }
     }
 }

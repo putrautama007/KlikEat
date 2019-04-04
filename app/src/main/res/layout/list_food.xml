@@ -20,9 +20,11 @@
             android:weightSum="3"
             android:padding="10dp">
             <ImageView
+                android:id="@+id/iv_produk"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_width="111dp"
-                android:layout_height="111dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:background="@drawable/round_background"/>
 
             <LinearLayout

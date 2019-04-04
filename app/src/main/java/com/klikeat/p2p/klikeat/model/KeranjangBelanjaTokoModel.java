@@ -1,12 +1,14 @@
 package com.klikeat.p2p.klikeat.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KeranjangBelanjaTokoModel {
-    String fotoPenjual,namaToko;
-    List<KeranjangBelanjaProdukModel> keranjangBelanjaProdukModel;
+    String fotoPenjual, namaToko;
+    KeranjangBelanjaProdukModel keranjangBelanjaProdukModel;
 
-    public KeranjangBelanjaTokoModel(String fotoPenjual, String namaToko, List<KeranjangBelanjaProdukModel> keranjangBelanjaProdukModel) {
+    public KeranjangBelanjaTokoModel(String fotoPenjual, String namaToko,
+                                     KeranjangBelanjaProdukModel keranjangBelanjaProdukModel) {
         this.fotoPenjual = fotoPenjual;
         this.namaToko = namaToko;
         this.keranjangBelanjaProdukModel = keranjangBelanjaProdukModel;
@@ -31,11 +33,11 @@ public class KeranjangBelanjaTokoModel {
         this.namaToko = namaToko;
     }
 
-    public List<KeranjangBelanjaProdukModel> getKeranjangBelanjaProdukModel() {
+    public KeranjangBelanjaProdukModel getKeranjangBelanjaProdukModel() {
         return keranjangBelanjaProdukModel;
     }
 
-    public void setKeranjangBelanjaProdukModel(List<KeranjangBelanjaProdukModel> keranjangBelanjaProdukModel) {
+    public void setKeranjangBelanjaProdukModel(KeranjangBelanjaProdukModel keranjangBelanjaProdukModel) {
         this.keranjangBelanjaProdukModel = keranjangBelanjaProdukModel;
     }
 }
