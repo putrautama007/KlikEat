@@ -1,5 +1,6 @@
 package com.klikeat.p2p.klikeat;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -111,6 +112,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_buat_pesanan : {
+                startActivity(new Intent(CheckOutActivity.this,PembayaranActivity.class));
                 break;
             }
             case R.id.iv_back_check_out:{

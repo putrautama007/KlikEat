@@ -224,6 +224,8 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
                     keranjangBelanjaProdukModel = new KeranjangBelanjaProdukModel(makananModel.foto,
                             makananModel.nama_produk,makananModel.harga,"0");
                     addToKeranjang(makananModel.foto,makananModel.penjual,keranjangBelanjaProdukModel);
+                    snackbar = Snackbar.make(constraintLayout, "Ditambah ke dalam keranjang", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
                     Log.d("add to keranjang", "onClick: berhasil add to keranjang");
                 } else {
                     startActivity(new Intent(DetailMakananActivity.this, LoginActivity.class));

@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CheckOutActivity"></activity>
+        <activity android:name=".TransferActivity"></activity>
+        <activity android:name=".PembayaranActivity" />
+        <activity android:name=".CheckOutActivity" />
         <activity android:name=".KeranjangActivity" />
         <activity android:name=".PenilaianActivity" />
         <activity android:name=".DetailMakananActivity" />
