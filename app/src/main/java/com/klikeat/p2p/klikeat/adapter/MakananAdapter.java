@@ -16,7 +16,10 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.klikeat.p2p.klikeat.DetailMakananActivity;
 import com.klikeat.p2p.klikeat.R;
+import com.klikeat.p2p.klikeat.Util;
 import com.klikeat.p2p.klikeat.model.MakananModel;
+import com.klikeat.p2p.klikeat.util.RoundedCornersTransformation;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.ViewHold
 
      Context context;
      List<MakananModel> makananModels;
+    Util util;
 
     public MakananAdapter(Context context, List<MakananModel> makananModels) {
         this.context = context;
@@ -38,10 +42,11 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+        util = new Util(context);
         viewHolder.namaProduk.setText(makananModels.get(i).nama_produk);
         viewHolder.namaPenjual.setText(makananModels.get(i).penjual);
         viewHolder.ratingMakanan.setRating(Float.parseFloat(makananModels.get(i).rating));
-        viewHolder.hargaMakanan.setText("Rp" + makananModels.get(i).harga);
+        viewHolder.hargaMakanan.setText(util.convertToIdr(Integer.parseInt(makananModels.get(i).harga)));
         viewHolder.jumlahUlasan.setText("("+makananModels.get(i).jumlahUlasan+")");
         viewHolder.cvProduk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +56,9 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.ViewHold
                 context.startActivity(intent);
             }
         });
-        Glide.with(context).load(makananModels.get(i).foto).into(viewHolder.ivFotoProduk);
+        RoundedCornersTransformation roundedCornersTransformation = new RoundedCornersTransformation(40,0);
+        Picasso.get().load(makananModels.get(i).foto).fit()
+                .centerCrop().transform(roundedCornersTransformation).into(viewHolder.ivFotoProduk);
     }
 
     @Override

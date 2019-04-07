@@ -12,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.klikeat.p2p.klikeat.R;
 import com.klikeat.p2p.klikeat.TransferActivity;
+import com.klikeat.p2p.klikeat.Util;
 import com.klikeat.p2p.klikeat.model.MetodePembayaranModel;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class MetodePembayaranAdapter extends RecyclerView.Adapter<MetodePembayar
 
     Context context;
     ArrayList<MetodePembayaranModel> metodePembayaranModels;
+    Util util;
+    Gson gson = new Gson();
 
     public MetodePembayaranAdapter(Context context, ArrayList<MetodePembayaranModel> metodePembayaranModels) {
         this.context = context;
@@ -35,13 +39,18 @@ public class MetodePembayaranAdapter extends RecyclerView.Adapter<MetodePembayar
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+        util = new Util(context);
         Glide.with(context).load(metodePembayaranModels.get(i).getFotoBank()).into(viewHolder.ivBank);
         viewHolder.namaBank.setText(metodePembayaranModels.get(i).getNamaBank());
         viewHolder.clBank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, TransferActivity.class));
+                util.saveMetodeTransfer(gson.toJson(metodePembayaranModels.get(i)));
+                Intent intent = new Intent(context, TransferActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intent);
+
             }
         });
     }

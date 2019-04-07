@@ -1,10 +1,14 @@
 package com.klikeat.p2p.klikeat.model;
 
 public class KeranjangBelanjaProdukModel {
-    String fotoProduk,namaProduk,hargaProduk,jumlahPembelian;
+    String produkId,fotoPenjual, namaToko,fotoProduk,namaProduk,hargaProduk,jumlahPembelian;
 
-    public KeranjangBelanjaProdukModel(String fotoProduk, String namaProduk,
-                                       String hargaProduk, String jumlahPembelian) {
+
+    public KeranjangBelanjaProdukModel(String produkId, String fotoPenjual, String namaToko,
+                                       String fotoProduk, String namaProduk, String hargaProduk, String jumlahPembelian) {
+        this.produkId = produkId;
+        this.fotoPenjual = fotoPenjual;
+        this.namaToko = namaToko;
         this.fotoProduk = fotoProduk;
         this.namaProduk = namaProduk;
         this.hargaProduk = hargaProduk;
@@ -12,6 +16,14 @@ public class KeranjangBelanjaProdukModel {
     }
 
     public KeranjangBelanjaProdukModel() {
+    }
+
+    public String getProdukId() {
+        return produkId;
+    }
+
+    public void setProdukId(String produkId) {
+        this.produkId = produkId;
     }
 
     public String getFotoProduk() {
@@ -44,5 +56,21 @@ public class KeranjangBelanjaProdukModel {
 
     public void setJumlahPembelian(String jumlahPembelian) {
         this.jumlahPembelian = jumlahPembelian;
+    }
+
+    public String getFotoPenjual() {
+        return fotoPenjual;
+    }
+
+    public void setFotoPenjual(String fotoPenjual) {
+        this.fotoPenjual = fotoPenjual;
+    }
+
+    public String getNamaToko() {
+        return namaToko;
+    }
+
+    public void setNamaToko(String namaToko) {
+        this.namaToko = namaToko;
     }
 }

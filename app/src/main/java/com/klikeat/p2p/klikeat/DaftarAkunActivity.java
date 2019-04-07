@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
     EditText noTlp,tglLahir,provinsi,kabupaten,alamatDetail;
     RadioButton pria,wanita;
     ImageButton btnDaftar,btnBack;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
         wanita = findViewById(R.id.rb_wanita);
         btnBack = findViewById(R.id.back_daftar_akun);
         btnDaftar = findViewById(R.id.konfirm_daftar_akun);
+        progressBar = findViewById(R.id.progress_daftar_akun);
         btnDaftar.setOnClickListener(this);
         btnBack.setOnClickListener(this);
 
@@ -54,7 +57,8 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void registerAccount(){
-        final String name = getIntent().getStringExtra("name");
+        progressBar.setVisibility(View.VISIBLE);
+        final String name = getIntent().getStringExtra("nama");
         final String email = getIntent().getStringExtra("email");
         final String password = getIntent().getStringExtra("password");
         final String notlp = noTlp.getText().toString();
@@ -81,6 +85,7 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
                 }else {
                     Toast.makeText(DaftarAkunActivity.this, "Gagal mendaftar", Toast.LENGTH_SHORT).show();
                 }
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -90,7 +95,7 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
         mUserDatabase = FirebaseDatabase.getInstance();
         mUserReference = mUserDatabase.getReference("user");
         String userId = mAuth.getUid();
-        user = new User(name,email,password,noTlp,tglLahir,alamat,jenisKelamin);
+        user = new User(name,email,password,noTlp,tglLahir,alamat,jenisKelamin,"0","");
         mUserReference.child(userId).setValue(user);
     }
 

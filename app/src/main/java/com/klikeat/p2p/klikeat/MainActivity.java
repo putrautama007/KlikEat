@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.klikeat.p2p.klikeat.fragment.FavouriteFragment;
+import com.klikeat.p2p.klikeat.fragment.HistoryFragment;
 import com.klikeat.p2p.klikeat.fragment.HomeFragment;
 import com.klikeat.p2p.klikeat.fragment.ProfileFragment;
 
@@ -32,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new FavouriteFragment();
                     break;
                 case R.id.navigation_history:
-                    mTextMessage.setText(R.string.title_history);
-                    return true;
+                    fragment = new HistoryFragment();
+                    break;
                 case R.id.navigation_profile:
                     fragment = new ProfileFragment();
                     break;

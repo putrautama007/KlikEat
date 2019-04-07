@@ -5,12 +5,15 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:id="@+id/cv_foodPopular"
         android:layout_width="110dp"
         android:layout_height="140dp"
-        android:layout_margin="10dp"
         android:orientation="horizontal"
-        app:cardCornerRadius="10dp">
+        android:elevation="8dp"
+        app:cardCornerRadius="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -18,7 +21,6 @@
             android:orientation="vertical">
 
             <ImageView
-
                 android:id="@+id/iv_foodPopular"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
@@ -62,13 +64,28 @@
                 android:textSize="8sp" />
 
             <RatingBar
-                style="?android:attr/ratingBarStyleSmall"
+                android:id="@+id/rating_popular"
+                style="@style/customRatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_foodPopularPrice"
                 android:layout_marginLeft="5dp"
+                android:isIndicator="true"
+                android:progressTint="@color/black"
                 android:numStars="5"
                 android:stepSize=".5" />
+
+            <TextView
+                android:id="@+id/jumlah_ulasan_populer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/rating_popular"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="0dp"
+                android:text="(2)"
+                android:textSize="12sp"
+                android:textStyle="normal" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

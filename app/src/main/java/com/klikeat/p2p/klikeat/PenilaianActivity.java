@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +32,7 @@ public class PenilaianActivity extends AppCompatActivity implements View.OnClick
     ArrayList<UlasanModel> ulasanModels;
     UlasanProdukDetailAdapter ulasanProdukAdapter;
     String produkId;
+    ProgressBar progressBar;
 
 
     @Override
@@ -38,7 +40,7 @@ public class PenilaianActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_penilaian);
         produkId = getIntent().getStringExtra("produkId");
-
+        progressBar = findViewById(R.id.progressbar_penilaian);
         btnSemua = findViewById(R.id.btn_semua_penilaian);
         btnPenilaian1 = findViewById(R.id.btn_penialaian_1);
         btnPenilaian2 = findViewById(R.id.btn_penialaian_2);
@@ -63,6 +65,7 @@ public class PenilaianActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void loadUlasan(String id){
+        progressBar.setVisibility(View.VISIBLE);
         mProdukDetailDatabase.child(id).child("ulasan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -103,6 +106,7 @@ public class PenilaianActivity extends AppCompatActivity implements View.OnClick
                 }else {
 
                 }
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override

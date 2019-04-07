@@ -21,24 +21,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.klikeat.p2p.klikeat.R;
 import com.klikeat.p2p.klikeat.adapter.FavoriteAdapter;
+import com.klikeat.p2p.klikeat.adapter.HistoryAdapter;
 import com.klikeat.p2p.klikeat.model.FavoriteModel;
+import com.klikeat.p2p.klikeat.model.HistoryModel;
 
 import java.util.ArrayList;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class HistoryFragment extends Fragment {
 
-public class FavouriteFragment extends Fragment {
-
-    RecyclerView rvFavorit;
-    FavoriteAdapter favoriteAdapter;
-    ArrayList<FavoriteModel> favoriteModel;
-    ProgressBar progressBar;
+    RecyclerView rvHistory;
+    HistoryAdapter historyAdapter;
+    ArrayList<HistoryModel> historyModels;
 
     DatabaseReference mUserDatabase;
-    FirebaseDatabase  mUserIntansce;
+    FirebaseDatabase mUserIntansce;
     FirebaseAuth mAuth;
     String userId;
+    ProgressBar progressBar;
 
-    public FavouriteFragment() {
+
+    public HistoryFragment() {
         // Required empty public constructor
     }
 
@@ -47,20 +52,20 @@ public class FavouriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourite, container, false);
+        return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvFavorit = view.findViewById(R.id.rv_favourite);
-        progressBar = view.findViewById(R.id.favorite_progressbar);
+        rvHistory = view.findViewById(R.id.rv_history);
+        progressBar = view.findViewById(R.id.history_progressbar);
 
-        mUserIntansce = FirebaseDatabase.getInstance();
-        mUserDatabase = mUserIntansce.getReference().child("user");
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getUid();
         if (mAuth.getCurrentUser() != null) {
+            mUserIntansce = FirebaseDatabase.getInstance();
+            mUserDatabase = mUserIntansce.getReference().child("user");
             loadData(userId);
         }else {
 
@@ -69,19 +74,19 @@ public class FavouriteFragment extends Fragment {
 
     private void loadData(String userId){
         progressBar.setVisibility(View.VISIBLE);
-        mUserDatabase.child(userId).child("favorite").addValueEventListener(new ValueEventListener() {
+        mUserDatabase.child(userId).child("riwayat").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                favoriteModel = new ArrayList<>();
+                historyModels = new ArrayList<>();
                 if (dataSnapshot != null){
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                        FavoriteModel favoriteModels = dataSnapshot1.getValue(FavoriteModel.class);
-                        favoriteModel.add(favoriteModels);
+                        HistoryModel historyModel = dataSnapshot1.getValue(HistoryModel.class);
+                        historyModels.add(historyModel);
                     }
-                    rvFavorit.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                    favoriteAdapter = new FavoriteAdapter(getContext(), favoriteModel);
-                    rvFavorit.setAdapter(favoriteAdapter);
-                    favoriteAdapter.notifyDataSetChanged();
+                    rvHistory.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                    historyAdapter = new HistoryAdapter(getContext(), historyModels);
+                    rvHistory.setAdapter(historyAdapter);
+                    historyAdapter.notifyDataSetChanged();
                 }
                 progressBar.setVisibility(View.INVISIBLE);
             }

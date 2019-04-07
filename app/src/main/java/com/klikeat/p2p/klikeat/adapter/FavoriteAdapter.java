@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide;
 import com.klikeat.p2p.klikeat.DetailMakananActivity;
 import com.klikeat.p2p.klikeat.R;
 import com.klikeat.p2p.klikeat.model.FavoriteModel;
+import com.klikeat.p2p.klikeat.util.RoundedCornersTransformation;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        Glide.with(context).load(favoriteModels.get(i).fotoPrduk).into(viewHolder.ivProduk);
+        RoundedCornersTransformation roundedCornersTransformation = new RoundedCornersTransformation(40,0);
+        Picasso.get().load(favoriteModels.get(i).fotoPrduk).fit()
+                .centerCrop().transform(roundedCornersTransformation).into(viewHolder.ivProduk);
         viewHolder.tvNamaProduk.setText(favoriteModels.get(i).namaProduk);
         viewHolder.tvNamaToko.setText(favoriteModels.get(i).namaPenjual);
         viewHolder.cvFavorite.setOnClickListener(new View.OnClickListener() {

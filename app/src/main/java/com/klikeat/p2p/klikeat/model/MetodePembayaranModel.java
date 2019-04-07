@@ -11,6 +11,9 @@ public class MetodePembayaranModel {
         this.namaRekening = namaRekening;
     }
 
+    public MetodePembayaranModel() {
+    }
+
     public String getNamaBank() {
         return namaBank;
     }

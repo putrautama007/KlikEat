@@ -37,7 +37,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" />
-        <activity android:name=".MakananActivity" />
+        <activity android:name=".MakananActivity"
+            android:windowSoftInputMode="stateUnchanged"/>
     </application>
 
 </manifest>

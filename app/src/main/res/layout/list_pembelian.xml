@@ -9,6 +9,8 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,11 +26,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintVertical_bias="0"
-                android:background="@drawable/background_profile_picture"
                 app:layout_constraintBottom_toTopOf="@+id/view3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
 
             <TextView
                 android:id="@+id/nama_penjual_pembelian"
@@ -40,10 +41,10 @@
                 android:textColor="#757575"
                 android:textSize="15sp"
                 android:textStyle="normal"
-                app:layout_constraintVertical_bias="0"
                 app:layout_constraintBottom_toTopOf="@+id/view3"
                 app:layout_constraintStart_toEndOf="@+id/iv_profile_penjual_pembelian"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
 
             <View
                 android:id="@+id/view3"
@@ -77,10 +78,10 @@
                 android:textColor="#757575"
                 android:textSize="13sp"
                 android:textStyle="normal"
-                app:layout_constraintVertical_bias="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_produk_pembelian"
-                app:layout_constraintTop_toBottomOf="@+id/view3" />
+                app:layout_constraintTop_toBottomOf="@+id/view3"
+                app:layout_constraintVertical_bias="1" />
 
             <TextView
                 android:id="@+id/tv_jumlah_produk_pembelian"
@@ -92,10 +93,11 @@
                 android:textColor="#757575"
                 android:textSize="13sp"
                 android:textStyle="normal"
-                app:layout_constraintVertical_bias="0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_produk_pembelian"
-                app:layout_constraintTop_toBottomOf="@+id/tv_nama_produk_pembelian" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_nama_produk_pembelian"
+                app:layout_constraintVertical_bias="0" />
+
             <TextView
                 android:id="@+id/tv_harga_produk_pembelian"
                 android:layout_width="wrap_content"
@@ -163,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Dikirim dalam 3-7 hari"
+                    android:text="Dikirim dalam 1-3 hari"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -212,13 +214,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
                 <TextView
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
                     android:text="Catatan :"
                     android:textColor="@color/black"
                     android:textSize="15sp"
@@ -228,16 +230,16 @@
 
                 <EditText
                     android:id="@+id/et_catatan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:textColor="@color/black"
-                    android:textAlignment="viewEnd"
-                    android:paddingEnd="8dp"
-                    android:paddingStart="8dp"
                     android:backgroundTint="@android:color/transparent"
                     android:hint="Tulis catatan untuk Penjual"
-                    android:textSize="12sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <View
@@ -257,8 +259,8 @@
                 android:id="@+id/ll_subtotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="8dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="3"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -266,13 +268,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/view5">
 
                 <TextView
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
                     android:text="Subtotal :"
                     android:textColor="@color/black"
                     android:textSize="15sp"
@@ -282,16 +284,16 @@
 
                 <TextView
                     android:id="@+id/subtotal"
-                    android:layout_weight="2"
-                    android:textColor="@color/black"
-                    android:textAlignment="viewEnd"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="Rp. 40.000"
-                    android:textSize="15sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="16dp"
+                    android:text="Rp. 40.000"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </android.support.constraint.ConstraintLayout>

@@ -3,9 +3,10 @@ package com.klikeat.p2p.klikeat.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,26 +14,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.klikeat.p2p.klikeat.MainActivity;
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.klikeat.p2p.klikeat.MakananActivity;
 import com.klikeat.p2p.klikeat.R;
-import com.klikeat.p2p.klikeat.ViewPagerAdapter;
-import com.klikeat.p2p.klikeat.model.PopularModel;
+import com.klikeat.p2p.klikeat.model.MakananModel;
 import com.klikeat.p2p.klikeat.adapter.PopularAdapter;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HomeFragment extends Fragment implements View.OnClickListener {
-    ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
-    List<PopularModel> popularModels = new ArrayList<>();
+    ArrayList<MakananModel> popularModels = new ArrayList<>();
+    int [] sampleImages ={R.drawable.analia_baggiano_776846_unsplash,R.drawable.ella_olsson_1184054_unsplash,R.drawable.ernest_ojeh_1348807_unsplash};
     ImageView snack, anekaLauk, riceBox, sambal, minuman, lainLain;
-
+    private DatabaseReference mProdukPopulerDatabase;
+    private FirebaseDatabase mProdukPopulerInstance;
+    RecyclerView recyclerView;
+    PopularAdapter popularAdapter;
+    CarouselView carouselView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -50,6 +57,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         sambal = view.findViewById(R.id.iv_chiliSauce);
         minuman = view.findViewById(R.id.iv_drinks);
         lainLain = view.findViewById(R.id.iv_etc);
+        recyclerView = view.findViewById(R.id.rv_popular);
+        carouselView = view.findViewById(R.id.carousel);
 
         snack.setOnClickListener(this);
         anekaLauk.setOnClickListener(this);
@@ -57,24 +66,51 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         sambal.setOnClickListener(this);
         minuman.setOnClickListener(this);
         lainLain.setOnClickListener(this);
+        mProdukPopulerInstance = FirebaseDatabase.getInstance();
+        mProdukPopulerDatabase = mProdukPopulerInstance.getReference().child("populerProduk");
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loadPopularProduk();
+        loadCarousel();
+    }
+
+    private void loadCarousel(){
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(new ImageListener() {
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                Glide.with(Objects.requireNonNull(getContext())).load(sampleImages[position]).
+                        into(imageView);
+            }
+        });
 
 
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        popularModels.add(new PopularModel("Makaron Mini isi 5", "Rp 14.000", R.drawable.analia_baggiano_776846_unsplash));
-        popularModels.add(new PopularModel("Sambal Cumi", "Rp 20.000", R.drawable.ella_olsson_1184054_unsplash));
-        popularModels.add(new PopularModel("Sambal Cumi Besar", "Rp 30.000", R.drawable.ernest_ojeh_1348807_unsplash));
+    private void loadPopularProduk() {
+        mProdukPopulerDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    MakananModel makananModel = dataSnapshot1.getValue(MakananModel.class);
+                    popularModels.add(makananModel);
+                }
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2,LinearLayoutManager.VERTICAL, false));
+                popularAdapter = new PopularAdapter(getContext(), popularModels);
+                recyclerView.setAdapter(popularAdapter);
+                popularAdapter.notifyDataSetChanged();
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = getView().findViewById(R.id.rv_popular);
-        PopularAdapter popularAdapter = new PopularAdapter(getActivity(), popularModels);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(popularAdapter);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -82,32 +118,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(getContext(), MakananActivity.class);
         switch (v.getId()) {
             case R.id.iv_Snack: {
-                intent.putExtra("toolbarName","Snack");
+                intent.putExtra("toolbarName", "Snack");
                 startActivity(intent);
                 break;
             }
             case R.id.iv_Food: {
-                intent.putExtra("toolbarName","Aneka Lauk");
+                intent.putExtra("toolbarName", "Aneka Lauk");
                 startActivity(intent);
                 break;
             }
             case R.id.iv_riceBox: {
-                intent.putExtra("toolbarName","Ricebox");
+                intent.putExtra("toolbarName", "Ricebox");
                 startActivity(intent);
                 break;
             }
             case R.id.iv_chiliSauce: {
-                intent.putExtra("toolbarName","Sambal");
+                intent.putExtra("toolbarName", "Sambal");
                 startActivity(intent);
                 break;
             }
             case R.id.iv_drinks: {
-                intent.putExtra("toolbarName","Minuman");
+                intent.putExtra("toolbarName", "Minuman");
                 startActivity(intent);
                 break;
             }
             case R.id.iv_etc: {
-                intent.putExtra("toolbarName","Lain Lain");
+                intent.putExtra("toolbarName", "Lain Lain");
                 startActivity(intent);
                 break;
             }

@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context=".fragment.HomeFragment">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:text="KlikEat"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="280dp"
-        android:layout_height="180dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/round_background" />
-
-
-    <ScrollView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="KlikEat"
+            android:textColor="#fff"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/carousel"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/carousel">
 
             <TextView
                 android:id="@+id/textView"
@@ -70,8 +76,8 @@
                         android:id="@+id/iv_Snack"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/macarons_new_01"
-                        android:background="@drawable/round_background_white" />
+                        android:background="@drawable/round_background_white"
+                        android:src="@mipmap/macarons_new_01" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -92,8 +98,8 @@
                         android:id="@+id/iv_Food"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/lauk_new_01"
-                        android:background="@drawable/round_background_white_blue" />
+                        android:background="@drawable/round_background_white_blue"
+                        android:src="@mipmap/lauk_new_01" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -114,8 +120,8 @@
                         android:id="@+id/iv_riceBox"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/lunchbox_new_01"
-                        android:background="@drawable/round_background_white" />
+                        android:background="@drawable/round_background_white"
+                        android:src="@mipmap/lunchbox_new_01" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -145,8 +151,8 @@
                         android:id="@+id/iv_chiliSauce"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/saus_new_01"
-                        android:background="@drawable/round_background_white" />
+                        android:background="@drawable/round_background_white"
+                        android:src="@mipmap/saus_new_01" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -168,8 +174,8 @@
                         android:id="@+id/iv_drinks"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/minuman_new_01"
-                        android:background="@drawable/round_background_white_blue" />
+                        android:background="@drawable/round_background_white_blue"
+                        android:src="@mipmap/minuman_new_01" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -190,8 +196,8 @@
                         android:id="@+id/iv_etc"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/rice_new_01"
-                        android:background="@drawable/round_background_white" />
+                        android:background="@drawable/round_background_white"
+                        android:src="@mipmap/rice_new_01" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -217,16 +223,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_popular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginBottom="30dp"
+                    android:orientation="horizontal"
                     tools:listitem="@layout/list_popular">
 
 
@@ -234,8 +242,5 @@
             </LinearLayout>
 
         </LinearLayout>
-
-    </ScrollView>
-
-
-</LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

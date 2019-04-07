@@ -1,12 +1,18 @@
 package com.klikeat.p2p.klikeat.model;
 
-public class PembelianModel {
-    String fotoToko, namaToko,namaProduk,fotoProduk,jumlahProduk,hargaProduk,hargaPengiriman,catatan,
-            subtotal,status,produkId;
+import java.util.ArrayList;
 
-    public PembelianModel(String fotoToko, String namaToko, String namaProduk, String fotoProduk,
-                          String jumlahProduk, String hargaProduk, String hargaPengiriman,
-                          String catatan, String subtotal, String status, String produkId) {
+public class HistoryModel {
+    String tglTransaksi, idTransaksi, totalPembayaran,fotoToko, namaToko, namaProduk,
+            fotoProduk, jumlahProduk, hargaProduk, hargaPengiriman, catatan, subtotal, status;
+
+    public HistoryModel(String tglTransaksi, String idTransaksi, String totalPembayaran, String fotoToko,
+                        String namaToko, String namaProduk, String fotoProduk, String jumlahProduk,
+                        String hargaProduk, String hargaPengiriman, String catatan,
+                        String subtotal, String status) {
+        this.tglTransaksi = tglTransaksi;
+        this.idTransaksi = idTransaksi;
+        this.totalPembayaran = totalPembayaran;
         this.fotoToko = fotoToko;
         this.namaToko = namaToko;
         this.namaProduk = namaProduk;
@@ -17,26 +23,33 @@ public class PembelianModel {
         this.catatan = catatan;
         this.subtotal = subtotal;
         this.status = status;
-        this.produkId = produkId;
     }
 
-    public PembelianModel() {
+    public HistoryModel() {
     }
 
-    public String getProdukId() {
-        return produkId;
+    public String getTglTransaksi() {
+        return tglTransaksi;
     }
 
-    public void setProdukId(String produkId) {
-        this.produkId = produkId;
+    public void setTglTransaksi(String tglTransaksi) {
+        this.tglTransaksi = tglTransaksi;
     }
 
-    public String getStatus() {
-        return status;
+    public String getIdTransaksi() {
+        return idTransaksi;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIdTransaksi(String idTransaksi) {
+        this.idTransaksi = idTransaksi;
+    }
+
+    public String getTotalPembayaran() {
+        return totalPembayaran;
+    }
+
+    public void setTotalPembayaran(String totalPembayaran) {
+        this.totalPembayaran = totalPembayaran;
     }
 
     public String getFotoToko() {
@@ -109,5 +122,13 @@ public class PembelianModel {
 
     public void setSubtotal(String subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

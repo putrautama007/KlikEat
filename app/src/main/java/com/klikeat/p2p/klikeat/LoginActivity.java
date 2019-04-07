@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button btnLogin;
     EditText email,password;
     FirebaseAuth mAuth;
-
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password = findViewById(R.id.password);
         toRegister = findViewById(R.id.to_register);
         btnLogin = findViewById(R.id.btn_sign_in);
+        progressBar = findViewById(R.id.progressbar_login);
         lupaPassword.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
         toRegister.setOnClickListener(this);
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loginAccount(){
+        progressBar.setVisibility(View.VISIBLE);
         String emailLogin = email.getText().toString();
         String passwordLogin = password.getText().toString();
 
@@ -57,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }else {
                     Toast.makeText(LoginActivity.this, "Gagal masuk", Toast.LENGTH_SHORT).show();
                 }
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
 

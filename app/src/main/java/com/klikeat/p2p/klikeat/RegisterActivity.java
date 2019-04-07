@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +20,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText nama,email,konfirmasiPassword,password;
     Intent intent;
     ConstraintLayout textToLogin;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        progressBar = findViewById(R.id.progressbar_register);
         btnRegister = findViewById(R.id.btn_daftar);
         nama = findViewById(R.id.nama_register);
         email = findViewById(R.id.email_register);
@@ -35,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerAkun(){
+        progressBar.setVisibility(View.VISIBLE);
         String name = nama.getText().toString();
         String emailAkun = email.getText().toString();
         String passwordAkun = password.getText().toString();
@@ -77,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         intent.putExtra("email",emailAkun);
         intent.putExtra("password",passwordAkun);
         startActivity(intent);
-
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -27,19 +28,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.klikeat.p2p.klikeat.adapter.MakananAdapter;
 import com.klikeat.p2p.klikeat.adapter.UlasanProdukAdapter;
 import com.klikeat.p2p.klikeat.model.FavoriteModel;
 import com.klikeat.p2p.klikeat.model.KeranjangBelanjaProdukModel;
-import com.klikeat.p2p.klikeat.model.KeranjangBelanjaTokoModel;
 import com.klikeat.p2p.klikeat.model.MakananModel;
 import com.klikeat.p2p.klikeat.model.PembelianModel;
 import com.klikeat.p2p.klikeat.model.UlasanModel;
+import com.klikeat.p2p.klikeat.util.RoundedCornersTransformation;
+import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class DetailMakananActivity extends AppCompatActivity implements View.OnClickListener {
     MakananModel makananModel;
@@ -60,17 +58,19 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
     String userId,produkId;
     Boolean isFavorite = false;
     FavoriteModel favoriteModel;
-    KeranjangBelanjaTokoModel keranjangBelanjaTokoModel;
     KeranjangBelanjaProdukModel keranjangBelanjaProdukModel;
     Snackbar snackbar;
     ConstraintLayout constraintLayout;
     PembelianModel pembelianModel;
+    Util util;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_makanan);
         initView();
+        util = new Util(this);
         mProdukDetailInstance = FirebaseDatabase.getInstance();
         mProdukDetailDatabase = mProdukDetailInstance.getReference().child("produk");
         mUserIntansce = FirebaseDatabase.getInstance();
@@ -94,6 +94,7 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initView() {
+        progressBar = findViewById(R.id.progressbar_detail_makanan);
         ivProduk = findViewById(R.id.iv_makanan_detail);
         tvNamaProduk = findViewById(R.id.tv_foodName_detail);
         hargaProduk = findViewById(R.id.tv_harga_detail);
@@ -126,7 +127,7 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
 
     private void loadData(MakananModel makananModel) {
         tvNamaProduk.setText(makananModel.nama_produk);
-        hargaProduk.setText(makananModel.harga);
+        hargaProduk.setText(util.convertToIdr(Integer.parseInt(makananModel.harga)));
         ratingBarProduk.setRating(Float.parseFloat(makananModel.rating));
         jumlahUlasanProduk.setText("(" + makananModel.jumlahUlasan + ")");
         deskripsiProduk.setText(makananModel.deskripsi);
@@ -134,12 +135,15 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
         lokasiPenjual.setText(makananModel.lokasi_penjual);
         ratingBarProdukUlasan.setRating(Float.parseFloat(makananModel.rating));
         jumlahUlasanPenilain.setText("(" + makananModel.jumlahUlasan + ")");
+        RoundedCornersTransformation roundedCornersTransformation1 = new RoundedCornersTransformation(100,0);
+        Picasso.get().load(makananModel.foto_penjual).fit()
+                .centerCrop().transform(roundedCornersTransformation1).into(profilePenjual);
         Glide.with(this).load(makananModel.foto).into(ivProduk);
-        Glide.with(this).load(makananModel.foto_penjual).into(profilePenjual);
 
     }
 
     private void loadData(String produkId){
+        progressBar.setVisibility(View.VISIBLE);
         mProdukDetailDatabase.child(produkId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -148,7 +152,7 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
                         Log.d("isismakananModel","isi:" +makananModel);
                         loadData(makananModel);
                 }
-
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -207,12 +211,13 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
             }
             case R.id.btn_beli: {
                 if (mAuth.getCurrentUser() != null) {
-                    String hargaPengiriman = "20000";
+                    String hargaPengiriman = "12000";
                     String catatan = "";
                     String jumlah = "1";
                     int subtotal = Integer.parseInt(hargaPengiriman)+Integer.parseInt(makananModel.harga);
                     beliSekarang(makananModel.foto_penjual,makananModel.penjual,makananModel.nama_produk
-                            ,makananModel.foto,jumlah,makananModel.harga,hargaPengiriman,catatan,String.valueOf(subtotal));
+                            ,makananModel.foto,jumlah,makananModel.harga,hargaPengiriman,catatan,
+                            String.valueOf(subtotal),makananModel.produk_id);
                     startActivity(new Intent(DetailMakananActivity.this, CheckOutActivity.class));
                 } else {
                     startActivity(new Intent(DetailMakananActivity.this, LoginActivity.class));
@@ -221,9 +226,9 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
             }
             case R.id.btn_add_to_cart: {
                 if (mAuth.getCurrentUser() != null) {
-                    keranjangBelanjaProdukModel = new KeranjangBelanjaProdukModel(makananModel.foto,
-                            makananModel.nama_produk,makananModel.harga,"0");
-                    addToKeranjang(makananModel.foto,makananModel.penjual,keranjangBelanjaProdukModel);
+
+                    addToKeranjang(makananModel.produk_id,makananModel.foto,makananModel.penjual,
+                            makananModel.foto,makananModel.nama_produk,makananModel.harga,"0");
                     snackbar = Snackbar.make(constraintLayout, "Ditambah ke dalam keranjang", Snackbar.LENGTH_SHORT);
                     snackbar.show();
                     Log.d("add to keranjang", "onClick: berhasil add to keranjang");
@@ -253,9 +258,12 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void addToKeranjang(final String fotoToko, final String namaToko, final KeranjangBelanjaProdukModel keranjangBelanjaProdukModels) {
-        keranjangBelanjaTokoModel = new KeranjangBelanjaTokoModel(fotoToko,namaToko,keranjangBelanjaProdukModels);
-        mUserDatabase.child(userId).child("keranjang").child(namaToko).setValue(keranjangBelanjaTokoModel);
+    private void addToKeranjang(String produkId,String fotoPenjual, String namaToko, String fotoProduk,
+                                String namaProduk, String hargaProduk,
+                                String jumlahPembelian) {
+        keranjangBelanjaProdukModel = new KeranjangBelanjaProdukModel(produkId,fotoPenjual,
+                namaToko,fotoProduk,namaProduk,hargaProduk,jumlahPembelian);
+        mUserDatabase.child(userId).child("keranjang").child(produkId).setValue(keranjangBelanjaProdukModel);
         snackbar = Snackbar.make(constraintLayout, "Ditambah kedalam keranjang", Snackbar.LENGTH_SHORT);
         snackbar.show();
 
@@ -263,9 +271,10 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
 
     private void beliSekarang(String fotoToko, String namaToko, String namaProduk, String fotoProduk,
                               String jumlahProduk, String hargaProduk, String hargaPengiriman,
-                              String catatan, String subtotal){
-        pembelianModel = new PembelianModel(fotoToko,namaToko,namaProduk,fotoProduk,jumlahProduk,hargaProduk,hargaPengiriman,catatan,subtotal);
-        mUserDatabase.child(userId).child("pembelian").child(namaToko).setValue(pembelianModel);
+                              String catatan, String subtotal,String produkId){
+        pembelianModel = new PembelianModel(fotoToko,namaToko,namaProduk,fotoProduk,jumlahProduk,
+                hargaProduk,hargaPengiriman,catatan,subtotal,"Menunggu pembayaran",produkId);
+        mUserDatabase.child(userId).child("pembelian").child(produkId).setValue(pembelianModel);
     }
 
     private void addToFavorite(String fotoPrduk, String namaProduk, String namaPenjual, String produkId) {
