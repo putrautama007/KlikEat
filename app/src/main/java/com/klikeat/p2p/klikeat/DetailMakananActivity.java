@@ -79,17 +79,32 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
         userId = mAuth.getUid();
         String makananData = getIntent().getStringExtra("produkData");
         produkId = getIntent().getStringExtra("produkId");
+        checkUserState(makananData);
 
-        if (produkId != null){
-            checkFavorite(produkId);
-            loadData(produkId);
-            Log.d("produkId", "onCreate: "+produkId);
-            loadUlasan(produkId);
+    }
+    private void checkUserState(String makananData){
+        if (userId != null) {
+            if (produkId != null) {
+                checkFavorite(produkId);
+                loadData(produkId);
+                Log.d("produkId", "onCreate: " + produkId);
+                loadUlasan(produkId);
+            } else {
+                makananModel = new Gson().fromJson(makananData, MakananModel.class);
+                checkFavorite(makananModel.produk_id);
+                loadData(makananModel);
+                loadUlasan(makananModel.produk_id);
+            }
         }else {
-            makananModel = new Gson().fromJson(makananData, MakananModel.class);
-            checkFavorite(makananModel.produk_id);
-            loadData(makananModel);
-            loadUlasan(makananModel.produk_id);
+            if (produkId != null) {
+                loadData(produkId);
+                Log.d("produkId", "onCreate: " + produkId);
+                loadUlasan(produkId);
+            } else {
+                makananModel = new Gson().fromJson(makananData, MakananModel.class);
+                loadData(makananModel);
+                loadUlasan(makananModel.produk_id);
+            }
         }
     }
 

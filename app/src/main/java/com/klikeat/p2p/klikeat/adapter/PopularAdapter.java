@@ -1,7 +1,9 @@
 package com.klikeat.p2p.klikeat.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.google.gson.Gson;
+import com.klikeat.p2p.klikeat.DetailMakananActivity;
 import com.klikeat.p2p.klikeat.R;
 import com.klikeat.p2p.klikeat.Util;
 import com.klikeat.p2p.klikeat.model.MakananModel;
@@ -43,13 +47,21 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         util = new Util(context);
         myViewHolder.tvFoodName.setText(popularModels.get(i).getNama_produk());
         myViewHolder.tvFoodPrice.setText(util.convertToIdr(Integer.parseInt(popularModels.get(i).getHarga())));
         Glide.with(context).load(popularModels.get(i).getFoto()).into(myViewHolder.ivPopularPicture);
         myViewHolder.ratingBar.setRating(Float.parseFloat(popularModels.get(i).rating));
         myViewHolder.tvRatingUlasan.setText("("+popularModels.get(i).jumlahUlasan+")");
+        myViewHolder.cvPopular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailMakananActivity.class);
+                intent.putExtra("produkData",new Gson().toJson(popularModels.get(i)));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -62,6 +74,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
         TextView tvFoodPrice,tvRatingUlasan;
         ImageView ivPopularPicture;
         RatingBar ratingBar;
+        CardView cvPopular;
         public MyViewHolder(View view){
             super(view);
             tvFoodName =  view.findViewById(R.id.tv_foodPopularName);
@@ -69,6 +82,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
             ivPopularPicture =  view.findViewById(R.id.iv_foodPopular);
             ratingBar = view.findViewById(R.id.rating_popular);
             tvRatingUlasan = view.findViewById(R.id.jumlah_ulasan_populer);
+            cvPopular = view.findViewById(R.id.cv_foodPopular);
 
         }
     }

@@ -44,36 +44,45 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String passwordAkun = password.getText().toString();
         String konfirmasiPassworf = konfirmasiPassword.getText().toString();
 
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(getApplicationContext(), "Mohon masukan nama", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
         if (TextUtils.isEmpty(emailAkun)) {
             Toast.makeText(getApplicationContext(), "Mohon masukan email", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(emailAkun).matches()) {
             Toast.makeText(getApplicationContext(), "Email sudah digunakan silahkan gunakan email lain", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.INVISIBLE);
             return;
         }
         if (TextUtils.isEmpty(passwordAkun)) {
             Toast.makeText(getApplicationContext(),"Mohon masukan kata sandi", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (passwordAkun.length() < 6) {
-            Toast.makeText(getApplicationContext(), "Kata sandi minimal terdiri dari 6 karakter", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (konfirmasiPassworf.length() < 6) {
-            Toast.makeText(getApplicationContext(), "Kata sandi minimal terdiri dari 6 karakter", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(getApplicationContext(), "Mohon masukan nama", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
             return;
         }
         if (TextUtils.isEmpty(konfirmasiPassworf)) {
             Toast.makeText(getApplicationContext(), "Mohon masukan konfirmasi kata sandi", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if (passwordAkun.length() < 6) {
+            Toast.makeText(getApplicationContext(), "Kata sandi minimal terdiri dari 6 karakter", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if (konfirmasiPassworf.length() < 6) {
+            Toast.makeText(getApplicationContext(), "Kata sandi konfirmasi harus sama dengan kata sandi", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.INVISIBLE);
             return;
         }
         if (!konfirmasiPassworf.equals(passwordAkun)){
             Toast.makeText(getApplicationContext(), "Kata sandi konfirmasi harus sama dengan kata sandi", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
         }
 
         intent = new Intent(this, DaftarAkunActivity.class);

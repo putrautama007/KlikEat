@@ -102,7 +102,11 @@ public class TransferActivity extends AppCompatActivity implements View.OnClickL
                 util.clearPembelian();
                 setPoin();
                 removeData(userId);
-                startActivity(new Intent(this,MainActivity.class));
+                Intent intent = new Intent(this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
                 break;
             }
@@ -147,6 +151,11 @@ public class TransferActivity extends AppCompatActivity implements View.OnClickL
         util.clearPembelian();
         removeData(userId);
         setPoin();
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         finish();
     }
 }

@@ -54,7 +54,6 @@
                 android:textSize="15sp"
                 android:textStyle="normal"
                 android:textColor="#757575"
-                android:text="Test"
                 app:layout_constraintBottom_toTopOf="@+id/view3"
                 app:layout_constraintStart_toEndOf="@+id/iv_profile_penjual_keranjang"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +115,6 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginTop="8dp"
-                android:text="Makaroni"
                 android:textColor="#757575"
                 android:textSize="13sp"
                 android:textStyle="normal"
@@ -134,7 +132,6 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Rp.20000"
                 android:textColor="#ff7600"
                 android:textSize="13sp"
                 android:textStyle="bold"

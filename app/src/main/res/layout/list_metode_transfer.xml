@@ -25,7 +25,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Mandiri"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="normal"

@@ -94,10 +94,10 @@ public class PenilaianActivity extends AppCompatActivity implements View.OnClick
                     }
                     btnSemua.setText("Semua (" + ulasanModels.size() +")");
                     btnPenilaian1.setText("1 Bintang ("+penilaian1+")");
-                    btnPenilaian2.setText("1 Bintang ("+penilaian2+")");
-                    btnPenilaian3.setText("1 Bintang ("+penilaian3+")");
-                    btnPenilaian4.setText("1 Bintang ("+penilaian4+")");
-                    btnPenilaian5.setText("1 Bintang ("+penilaian5+")");
+                    btnPenilaian2.setText("2 Bintang ("+penilaian2+")");
+                    btnPenilaian3.setText("3 Bintang ("+penilaian3+")");
+                    btnPenilaian4.setText("4 Bintang ("+penilaian4+")");
+                    btnPenilaian5.setText("5 Bintang ("+penilaian5+")");
                     rvUlasanDetail.setLayoutManager(new LinearLayoutManager(PenilaianActivity.this, LinearLayoutManager.VERTICAL, false));
                     ulasanProdukAdapter = new UlasanProdukDetailAdapter(PenilaianActivity.this, ulasanModels);
                     rvUlasanDetail.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));

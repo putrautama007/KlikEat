@@ -5,14 +5,16 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:id="@+id/cv_foodPopular"
-        android:layout_width="110dp"
-        android:layout_height="140dp"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
         android:orientation="horizontal"
         android:elevation="8dp"
+        android:outlineAmbientShadowColor="@color/black"
         app:cardCornerRadius="20dp">
 
         <RelativeLayout
@@ -22,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/iv_foodPopular"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_width="120dp"
+                android:layout_height="96dp"
                 android:background="#2d2d2d"
                 android:scaleType="centerCrop"
 
@@ -49,9 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_foodPopular"
                 android:layout_margin="5dp"
-                android:text="Macaron isi 5"
                 android:textColor="#000000"
-                android:textSize="8sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tv_foodPopularPrice"
@@ -59,9 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_foodPopularName"
                 android:layout_marginLeft="5dp"
-                android:text="Rp 14.000"
                 android:textColor="#ff7600"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <RatingBar
                 android:id="@+id/rating_popular"
@@ -80,10 +80,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/rating_popular"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="0dp"
-                android:text="(2)"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="-1dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toEndOf="@+id/rating_popular"
                 android:textSize="12sp"
                 android:textStyle="normal" />
 

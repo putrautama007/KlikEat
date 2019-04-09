@@ -39,6 +39,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         viewHolder.tglTransaksi.setText(historyModels.get(i).getTglTransaksi());
         viewHolder.namaProduk.setText(historyModels.get(i).getNamaProduk());
         viewHolder.namaPenjual.setText(historyModels.get(i).getNamaToko());
+        viewHolder.status.setText(historyModels.get(i).getStatus());
         Picasso.get().load(historyModels.get(i).getFotoProduk()).fit()
                 .centerCrop().transform(roundedCornersTransformation).into(viewHolder.ivProduk);
     }
@@ -50,7 +51,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivProduk;
-        TextView namaProduk,namaPenjual, tglTransaksi;
+        TextView namaProduk,namaPenjual, tglTransaksi,status;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +59,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             namaPenjual = itemView.findViewById(R.id.nama_penjual_history);
             namaProduk = itemView.findViewById(R.id.nama_produk_history);
             tglTransaksi = itemView.findViewById(R.id.tgl_transaksi_history);
+            status = itemView.findViewById(R.id.status_history);
         }
     }
 }

@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,13 +73,46 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
             jenisKelamin = "Wanita";
         }
 
+        if (TextUtils.isEmpty(notlp)){
+            Toast.makeText(getApplicationContext(), "Mohon masukan no telepon", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if (TextUtils.isEmpty(ttl)){
+            Toast.makeText(getApplicationContext(), "Mohon masukan tanggal lahir", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if (TextUtils.isEmpty(provinsi.getText().toString())){
+            Toast.makeText(getApplicationContext(), "Mohon masukan alamat", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if (TextUtils.isEmpty(kabupaten.getText().toString())){
+            Toast.makeText(getApplicationContext(), "Mohon masukan alamat", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if (TextUtils.isEmpty(alamatDetail.getText().toString())){
+            Toast.makeText(getApplicationContext(), "Mohon masukan alamat", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if (!pria.isChecked() && !wanita.isChecked()){
+            Toast.makeText(getApplicationContext(), "Mohon pilih jenis kelamin", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            return;
+        }
+
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     saveToDatabase(name,email,password,notlp,ttl,alamat,jenisKelamin);
-                    Intent intent = new Intent(DaftarAkunActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(DaftarAkunActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
                     Toast.makeText(DaftarAkunActivity.this, "Berhasil mendaftar, silahkan login", Toast.LENGTH_SHORT).show();

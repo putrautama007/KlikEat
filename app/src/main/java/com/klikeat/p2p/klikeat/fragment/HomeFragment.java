@@ -24,6 +24,8 @@ import com.klikeat.p2p.klikeat.MakananActivity;
 import com.klikeat.p2p.klikeat.R;
 import com.klikeat.p2p.klikeat.model.MakananModel;
 import com.klikeat.p2p.klikeat.adapter.PopularAdapter;
+import com.klikeat.p2p.klikeat.util.RoundedCornersTransformation;
+import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -33,7 +35,7 @@ import java.util.Objects;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     ArrayList<MakananModel> popularModels = new ArrayList<>();
-    int [] sampleImages ={R.drawable.analia_baggiano_776846_unsplash,R.drawable.ella_olsson_1184054_unsplash,R.drawable.ernest_ojeh_1348807_unsplash};
+    int [] sampleImages ={R.drawable.potato,R.drawable.ella_olsson_1184054_unsplash,R.drawable.ernest_ojeh_1348807_unsplash};
     ImageView snack, anekaLauk, riceBox, sambal, minuman, lainLain;
     private DatabaseReference mProdukPopulerDatabase;
     private FirebaseDatabase mProdukPopulerInstance;
@@ -53,7 +55,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         snack = view.findViewById(R.id.iv_Snack);
         anekaLauk = view.findViewById(R.id.iv_Food);
-        riceBox = view.findViewById(R.id.iv_riceBox);
+        riceBox = view.findViewById(R.id.iv_frosen);
         sambal = view.findViewById(R.id.iv_chiliSauce);
         minuman = view.findViewById(R.id.iv_drinks);
         lainLain = view.findViewById(R.id.iv_etc);
@@ -79,14 +81,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadCarousel(){
-        carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
-                Glide.with(Objects.requireNonNull(getContext())).load(sampleImages[position]).
-                        into(imageView);
+                RoundedCornersTransformation roundedCornersTransformation = new RoundedCornersTransformation(45,0);
+                Picasso.get().load(sampleImages[position]).transform(roundedCornersTransformation).fit().into(imageView);
             }
         });
+        carouselView.setPageCount(sampleImages.length);
 
 
     }
@@ -127,8 +129,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             }
-            case R.id.iv_riceBox: {
-                intent.putExtra("toolbarName", "Ricebox");
+            case R.id.iv_frosen: {
+                intent.putExtra("toolbarName", "Frozen Food");
                 startActivity(intent);
                 break;
             }
