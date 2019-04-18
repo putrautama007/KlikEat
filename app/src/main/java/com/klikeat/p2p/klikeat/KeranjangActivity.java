@@ -162,6 +162,10 @@ public class KeranjangActivity extends AppCompatActivity implements View.OnClick
                         }
                     }
                     try {
+                        if (keranjangBelanjaProdukModels.size() == 0){
+                            constraintLayout.setVisibility(View.INVISIBLE);
+                            checkBoxKeranjang.setVisibility(View.INVISIBLE);
+                        }
                         if (keranjangBelanjaProdukModels2.size() != keranjangBelanjaProdukModels.size()){
                             checkBoxKeranjang.setChecked(false);
                         }
@@ -171,6 +175,7 @@ public class KeranjangActivity extends AppCompatActivity implements View.OnClick
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+
 
                         tvSubtotal.setText(util.convertToIdr(subTotal));
                 }

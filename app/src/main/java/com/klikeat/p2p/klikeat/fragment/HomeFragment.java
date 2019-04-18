@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     MakananModel makananModel = dataSnapshot1.getValue(MakananModel.class);
                     popularModels.add(makananModel);
                 }
-                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2,LinearLayoutManager.VERTICAL, false));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
                 popularAdapter = new PopularAdapter(getContext(), popularModels);
                 recyclerView.setAdapter(popularAdapter);
                 popularAdapter.notifyDataSetChanged();

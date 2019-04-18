@@ -49,9 +49,11 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         util = new Util(context);
+        RoundedCornersTransformation roundedCornersTransformation = new RoundedCornersTransformation(10,0);
         myViewHolder.tvFoodName.setText(popularModels.get(i).getNama_produk());
         myViewHolder.tvFoodPrice.setText(util.convertToIdr(Integer.parseInt(popularModels.get(i).getHarga())));
-        Glide.with(context).load(popularModels.get(i).getFoto()).into(myViewHolder.ivPopularPicture);
+        Picasso.get().load(popularModels.get(i).getFoto()).fit().centerCrop().transform(roundedCornersTransformation).into(myViewHolder.ivPopularPicture);
+//        Glide.with(context).load(popularModels.get(i).getFoto()).into(myViewHolder.ivPopularPicture);
         myViewHolder.ratingBar.setRating(Float.parseFloat(popularModels.get(i).rating));
         myViewHolder.tvRatingUlasan.setText("("+popularModels.get(i).jumlahUlasan+")");
         myViewHolder.cvPopular.setOnClickListener(new View.OnClickListener() {

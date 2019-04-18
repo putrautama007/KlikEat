@@ -451,7 +451,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/circle_button"
+                    android:background="@android:color/transparent"
                     app:srcCompat="@drawable/ic_comment_black_24dp" />
 
                 <View
@@ -469,7 +469,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/circle_button"
+                    android:background="@android:color/transparent"
                     app:srcCompat="@drawable/ic_shopping_cart_black_24dp" />
             </LinearLayout>
 

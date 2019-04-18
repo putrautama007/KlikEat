@@ -87,12 +87,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/iv_profilePicture"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/background_profile_picture" />
                     </LinearLayout>
 
                     <TextView
@@ -100,7 +94,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/linear_photo"
-                        android:text="Edit Foto"
                         android:textAlignment="center" />
 
                     <TextView

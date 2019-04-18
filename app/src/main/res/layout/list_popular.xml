@@ -2,66 +2,79 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:id="@+id/cv_foodPopular"
-        android:layout_width="120dp"
-        android:layout_height="180dp"
-        android:orientation="horizontal"
-        android:elevation="8dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
         android:outlineAmbientShadowColor="@color/black"
         app:cardCornerRadius="10dp">
 
-        <RelativeLayout
+
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_foodPopular"
-                android:layout_width="120dp"
-                android:layout_height="96dp"
-                android:background="#2d2d2d"
+                android:layout_width="180dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="#2d2d2d"
                 android:scaleType="centerCrop"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/iv_foodPopular">
-
-                <ImageView
-                    android:id="@+id/iv_foodPopularFavourite"
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:layout_margin="5dp"
-                    app:srcCompat="@drawable/ic_favorite_orange_24dp" />
-
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_foodPopularFavourite"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_favorite_orange_24dp" />
 
             <TextView
                 android:id="@+id/tv_foodPopularName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/iv_foodPopular"
-                android:layout_margin="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
                 android:textColor="#000000"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_foodPopular" />
 
             <TextView
                 android:id="@+id/tv_foodPopularPrice"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_foodPopularName"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:textColor="#ff7600"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_foodPopularName" />
 
             <RatingBar
                 android:id="@+id/rating_popular"
@@ -69,11 +82,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_foodPopularPrice"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="8dp"
                 android:isIndicator="true"
-                android:progressTint="@color/black"
                 android:numStars="5"
-                android:stepSize=".5" />
+                android:progressTint="@color/black"
+                android:stepSize=".5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_foodPopularPrice" />
 
             <TextView
                 android:id="@+id/jumlah_ulasan_populer"
@@ -81,14 +99,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/rating_popular"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="-1dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:layout_toEndOf="@+id/rating_popular"
                 android:textSize="12sp"
-                android:textStyle="normal" />
-
-        </RelativeLayout>
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/rating_popular"
+                app:layout_constraintTop_toBottomOf="@+id/tv_foodPopularPrice" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

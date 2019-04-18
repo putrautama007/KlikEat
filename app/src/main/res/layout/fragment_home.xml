@@ -249,7 +249,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Popular this week"
+                android:text="Populer Minggu Ini"
                 android:textColor="#ff9300"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -265,8 +265,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="30dp"
                     android:orientation="horizontal"
                     tools:listitem="@layout/list_popular">

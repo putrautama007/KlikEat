@@ -215,20 +215,25 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
         Intent intent;
         switch (v.getId()) {
             case R.id.btn_favorite: {
+                progressBar.setVisibility(View.VISIBLE);
                 if (mAuth.getCurrentUser() != null) {
                     if (!isFavorite) {
                         Log.d("buttonFavorite", "is click");
                         addToFavorite(makananModel.foto_penjual, makananModel.nama_produk, makananModel.penjual, makananModel.produk_id);
+                        progressBar.setVisibility(View.INVISIBLE);
                     } else {
                         Log.d("buttonFavorite", "is not click");
                         removeFavorite();
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 } else {
                     startActivity(new Intent(DetailMakananActivity.this, LoginActivity.class));
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
                 break;
             }
             case R.id.btn_beli: {
+                progressBar.setVisibility(View.VISIBLE);
                 if (mAuth.getCurrentUser() != null) {
                     String hargaPengiriman = "12000";
                     String catatan = "";
@@ -238,21 +243,24 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
                             ,makananModel.foto,jumlah,makananModel.harga,hargaPengiriman,catatan,
                             String.valueOf(subtotal),makananModel.produk_id);
                     startActivity(new Intent(DetailMakananActivity.this, CheckOutActivity.class));
+                    progressBar.setVisibility(View.INVISIBLE);
                 } else {
                     startActivity(new Intent(DetailMakananActivity.this, LoginActivity.class));
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
                 break;
             }
             case R.id.btn_add_to_cart: {
+                progressBar.setVisibility(View.VISIBLE);
                 if (mAuth.getCurrentUser() != null) {
-
                     addToKeranjang(makananModel.produk_id,makananModel.foto,makananModel.penjual,
                             makananModel.foto,makananModel.nama_produk,makananModel.harga,"0");
                     snackbar = Snackbar.make(constraintLayout, "Ditambah ke dalam keranjang", Snackbar.LENGTH_SHORT);
                     snackbar.show();
-                    Log.d("add to keranjang", "onClick: berhasil add to keranjang");
+                    progressBar.setVisibility(View.INVISIBLE);
                 } else {
                     startActivity(new Intent(DetailMakananActivity.this, LoginActivity.class));
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
                 break;
             }
