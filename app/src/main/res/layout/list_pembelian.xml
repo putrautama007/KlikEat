@@ -188,10 +188,12 @@
                         android:textSize="13sp"
                         android:textStyle="normal" />
 
-                    <ImageView
+                    <ImageButton
+                        android:id="@+id/check_jasa_pengiriman"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:background="@drawable/circle_button"
                         app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
                 </LinearLayout>
 

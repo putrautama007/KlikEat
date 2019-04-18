@@ -1,7 +1,9 @@
 package com.klikeat.p2p.klikeat.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.klikeat.p2p.klikeat.DetailOrderActivity;
 import com.klikeat.p2p.klikeat.R;
 import com.klikeat.p2p.klikeat.model.HistoryModel;
 import com.klikeat.p2p.klikeat.util.RoundedCornersTransformation;
@@ -34,7 +37,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         RoundedCornersTransformation roundedCornersTransformation = new RoundedCornersTransformation(40,0);
         viewHolder.tglTransaksi.setText(historyModels.get(i).getTglTransaksi());
         viewHolder.namaProduk.setText(historyModels.get(i).getNamaProduk());
@@ -42,6 +45,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         viewHolder.status.setText(historyModels.get(i).getStatus());
         Picasso.get().load(historyModels.get(i).getFotoProduk()).fit()
                 .centerCrop().transform(roundedCornersTransformation).into(viewHolder.ivProduk);
+        viewHolder.clHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailOrderActivity.class);
+                intent.putExtra("historyId",historyModels.get(i).getIdTransaksi());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -52,6 +63,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivProduk;
         TextView namaProduk,namaPenjual, tglTransaksi,status;
+        ConstraintLayout clHistory;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +72,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             namaProduk = itemView.findViewById(R.id.nama_produk_history);
             tglTransaksi = itemView.findViewById(R.id.tgl_transaksi_history);
             status = itemView.findViewById(R.id.status_history);
+            clHistory = itemView.findViewById(R.id.cl_history);
         }
     }
 }

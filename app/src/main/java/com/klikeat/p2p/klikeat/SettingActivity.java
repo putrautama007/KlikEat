@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnEditProfile, btnLogout;
+    Button btnEditProfile, btnLogout,editPassword;
+    ImageButton ivBackSetting;
     FirebaseAuth mAuth;
 
     @Override
@@ -22,10 +24,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_setting);
         btnEditProfile = findViewById(R.id.btn_editProfil);
         btnLogout = findViewById(R.id.btn_logout);
+        ivBackSetting = findViewById(R.id.iv_back_setting);
+        editPassword = findViewById(R.id.btn_editPassword);
 
         mAuth = FirebaseAuth.getInstance();
         btnEditProfile.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
+        ivBackSetting.setOnClickListener(this);
+        editPassword.setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +49,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             }
             case R.id.btn_editProfil : {
                 startActivity( new Intent(SettingActivity.this, EditProfileActivity.class));
+                break;
+            }
+            case R.id.iv_back_setting :{
+                finish();
+                break;
+            }
+            case R.id.btn_editPassword :{
+                startActivity( new Intent(SettingActivity.this, ChangePasswordActivity.class));
                 break;
             }
         }

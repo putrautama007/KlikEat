@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.klikeat.p2p.klikeat.adapter.PembelianAdapter;
 import com.klikeat.p2p.klikeat.model.HistoryModel;
 import com.klikeat.p2p.klikeat.model.PembelianModel;
+import com.klikeat.p2p.klikeat.model.PengirimanModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,13 +33,15 @@ import java.util.Calendar;
 public class CheckOutActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvCheckOut;
-    ImageView backCheckout;
+    ImageButton backCheckout;
     TextView totalPembelian,alamatPengiriman;
     Button buatPesanan;
     PembelianAdapter pembelianAdapter;
     ArrayList<PembelianModel> pembelianModels = new ArrayList<>();
-    DatabaseReference  mUserDatabase;
-    FirebaseDatabase  mUserIntansce;
+    ArrayList<PengirimanModel> pengirimanModels = new ArrayList<>();
+    ArrayList<PembelianModel> pembelianModelArrayList = new ArrayList<>();
+    DatabaseReference  mUserDatabase,mPengirimanDatabse;
+    FirebaseDatabase  mUserIntansce, mPengirimanIntansce;
     FirebaseAuth mAuth;
     String userId,saveCurrentDate, saveCurrentTime,tglTransaksi
             ,idTransaksi;
@@ -61,38 +65,77 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         util = new Util(getApplicationContext());
         mUserIntansce = FirebaseDatabase.getInstance();
         mUserDatabase = mUserIntansce.getReference().child("user");
+        mPengirimanIntansce = FirebaseDatabase.getInstance();
+        mPengirimanDatabse = mPengirimanIntansce.getReference().child("pengiriman");
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getUid();
         util = new Util(getApplicationContext());
         loadData(userId);
         loadAddress(userId);
+        loadDataTotalPembelian(userId);
 
     }
 
     private void loadData(String id){
         progressBar.setVisibility(View.VISIBLE);
-        mUserDatabase.child(id).child("pembelian").addListenerForSingleValueEvent(new ValueEventListener() {
+        mUserDatabase.child(id).child("BarangDiBeli").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                int totalHarga = 0;
                 if (dataSnapshot != null){
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                         PembelianModel pembelianModel = dataSnapshot1.getValue(PembelianModel.class);
                         pembelianModels.add(pembelianModel);
                     }
-                    for (int i =0; i<pembelianModels.size();i++){
-                        totalHarga = totalHarga + (Integer.parseInt(pembelianModels.get(i).getHargaProduk())
-                                *Integer.parseInt(pembelianModels.get(i).getJumlahProduk())+
-                                Integer.parseInt(pembelianModels.get(i).getHargaPengiriman()));
+                    mPengirimanDatabse.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                PengirimanModel pengirimanModel = dataSnapshot1.getValue(PengirimanModel.class);
+                                pengirimanModels.add(pengirimanModel);
+                            }
+                            rvCheckOut.setLayoutManager(new LinearLayoutManager(CheckOutActivity.this, LinearLayoutManager.VERTICAL, false));
+                            pembelianAdapter = new PembelianAdapter(CheckOutActivity.this, pembelianModels,pengirimanModels);
+                            rvCheckOut.setAdapter(pembelianAdapter);
+                            pembelianAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void loadDataTotalPembelian(String id){
+        progressBar.setVisibility(View.VISIBLE);
+        mUserDatabase.child(id).child("BarangDiBeli").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                int totalHarga = 0;
+                if (dataSnapshot != null){
+                    pembelianModelArrayList.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                        PembelianModel pembelianModel = dataSnapshot1.getValue(PembelianModel.class);
+                        pembelianModelArrayList.add(pembelianModel);
                     }
-                    Log.d("totalPembelian", "onDataChange: "+totalHarga);
+                    for (int i =0; i<pembelianModelArrayList.size();i++){
+                        totalHarga = totalHarga + (Integer.parseInt(pembelianModelArrayList.get(i).getSubtotal()));
+                    }
                     totalPembelian.setText(util.convertToIdr(totalHarga));
-                    rvCheckOut.setLayoutManager(new LinearLayoutManager(CheckOutActivity.this, LinearLayoutManager.VERTICAL, false));
-                    pembelianAdapter = new PembelianAdapter(CheckOutActivity.this, pembelianModels);
-                    rvCheckOut.setAdapter(pembelianAdapter);
-                    pembelianAdapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -118,28 +161,31 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
 
     private void removeBeliSekarang(String id){
         Query removeBeliSekrangQuerry;
-        removeBeliSekrangQuerry= mUserDatabase.child(id).child("pembelian");
+        removeBeliSekrangQuerry= mUserDatabase.child(id).child("BarangDiBeli");
         removeBeliSekrangQuerry.getRef().removeValue();
     }
 
 
     private void addToHistory(){
-        getIdTransaksi();
-        getDate();
         for (int i =0; i<pembelianModels.size();i++){
+            getIdTransaksi();
+            getDate();
             HistoryModel historyModel = new HistoryModel(tglTransaksi,idTransaksi,
                     totalPembelian.getText().toString()
                     ,pembelianModels.get(i).getFotoToko()
                     ,pembelianModels.get(i).getNamaToko()
                     ,pembelianModels.get(i).getNamaProduk(),
                     pembelianModels.get(i).getFotoProduk(),
-                    pembelianModels.get(i).getJumlahProduk()
+                    pembelianModels.get(i).getJumlahPembelian()
                     ,pembelianModels.get(i).getHargaProduk()
                     ,pembelianModels.get(i).getHargaPengiriman(),
                     pembelianModels.get(i).getCatatan(),
                     pembelianModels.get(i).getSubtotal(),
-                    pembelianModels.get(i).getStatus());
-            mUserDatabase.child(userId).child("riwayat").child(idTransaksi).setValue(historyModel);
+                    "Menunggu konfirmasi pembayaran",
+                    pembelianModels.get(i).getJasaPengiriaman(),
+                    pembelianModels.get(i).getLamaPengiriman(),
+                    pembelianModels.get(i).getProduk_id());
+            mUserDatabase.child(userId).child("transaksi").child(idTransaksi).setValue(historyModel);
         }
         util.savePembelian(totalPembelian.getText().toString());
     }
@@ -159,8 +205,11 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HHmmss");
         saveCurrentTime = currentTime.format(calendar.getTime());
-        idTransaksi = saveCurrentDate+saveCurrentTime;
+        idTransaksi = saveCurrentDate+System.currentTimeMillis();
     }
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -168,6 +217,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_buat_pesanan : {
                 Intent intent = new Intent(CheckOutActivity.this,PembayaranActivity.class);
                 addToHistory();
+                removeBeliSekarang(userId);
                 intent.putExtra("transaksiId",idTransaksi);
                 startActivity(intent);
                 break;

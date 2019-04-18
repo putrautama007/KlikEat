@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public class HistoryModel {
     String tglTransaksi, idTransaksi, totalPembayaran,fotoToko, namaToko, namaProduk,
-            fotoProduk, jumlahProduk, hargaProduk, hargaPengiriman, catatan, subtotal, status;
+            fotoProduk, jumlahProduk, hargaProduk, hargaPengiriman, catatan, subtotal, status,
+    jasaPengiriaman,lamaPengiriman,produk_id;
 
-    public HistoryModel(String tglTransaksi, String idTransaksi, String totalPembayaran, String fotoToko,
-                        String namaToko, String namaProduk, String fotoProduk, String jumlahProduk,
-                        String hargaProduk, String hargaPengiriman, String catatan,
-                        String subtotal, String status) {
+    public HistoryModel(String tglTransaksi, String idTransaksi, String totalPembayaran,
+                        String fotoToko, String namaToko, String namaProduk, String fotoProduk,
+                        String jumlahProduk, String hargaProduk, String hargaPengiriman,
+                        String catatan, String subtotal, String status, String jasaPengiriaman,
+                        String lamaPengiriman, String produk_id) {
         this.tglTransaksi = tglTransaksi;
         this.idTransaksi = idTransaksi;
         this.totalPembayaran = totalPembayaran;
@@ -23,9 +25,36 @@ public class HistoryModel {
         this.catatan = catatan;
         this.subtotal = subtotal;
         this.status = status;
+        this.jasaPengiriaman = jasaPengiriaman;
+        this.lamaPengiriman = lamaPengiriman;
+        this.produk_id = produk_id;
     }
 
     public HistoryModel() {
+    }
+
+    public String getProduk_id() {
+        return produk_id;
+    }
+
+    public void setProduk_id(String produk_id) {
+        this.produk_id = produk_id;
+    }
+
+    public String getJasaPengiriaman() {
+        return jasaPengiriaman;
+    }
+
+    public void setJasaPengiriaman(String jasaPengiriaman) {
+        this.jasaPengiriaman = jasaPengiriaman;
+    }
+
+    public String getLamaPengiriman() {
+        return lamaPengiriman;
+    }
+
+    public void setLamaPengiriman(String lamaPengiriman) {
+        this.lamaPengiriman = lamaPengiriman;
     }
 
     public String getTglTransaksi() {

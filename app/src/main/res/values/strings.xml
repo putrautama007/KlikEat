@@ -7,7 +7,6 @@
     <string name="title_history">Riwayat</string>
     <string name="title_profile">Profil</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="password">Kata sandi</string>
     <string name="username">Username</string>

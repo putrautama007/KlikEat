@@ -42,6 +42,8 @@ public class UlasanProdukAdapter extends RecyclerView.Adapter<UlasanProdukAdapte
     public int getItemCount() {
         if (ulasanModels.size() == 0){
             return 0;
+        }else if(ulasanModels.size() == 1){
+            return 1;
         }else {
             return 2;
         }

@@ -14,8 +14,9 @@
         android:layout_height="180dp"
         android:orientation="horizontal"
         android:elevation="8dp"
+        android:background="@color/white"
         android:outlineAmbientShadowColor="@color/black"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,7 +29,6 @@
                 android:layout_height="96dp"
                 android:background="#2d2d2d"
                 android:scaleType="centerCrop"
-
                 />
 
             <LinearLayout

@@ -35,7 +35,7 @@ import java.util.Objects;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     ArrayList<MakananModel> popularModels = new ArrayList<>();
-    int [] sampleImages ={R.drawable.potato,R.drawable.ella_olsson_1184054_unsplash,R.drawable.ernest_ojeh_1348807_unsplash};
+    int [] sampleImages ={R.mipmap.promo1,R.mipmap.promo2,R.mipmap.promo3};
     ImageView snack, anekaLauk, riceBox, sambal, minuman, lainLain;
     private DatabaseReference mProdukPopulerDatabase;
     private FirebaseDatabase mProdukPopulerInstance;

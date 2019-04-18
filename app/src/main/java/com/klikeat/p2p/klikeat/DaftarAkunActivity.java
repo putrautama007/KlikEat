@@ -1,5 +1,6 @@
 package com.klikeat.p2p.klikeat;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -25,6 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.klikeat.p2p.klikeat.model.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class DaftarAkunActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseAuth mAuth;
@@ -35,6 +40,8 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
     RadioButton pria,wanita;
     ImageButton btnDaftar,btnBack;
     ProgressBar progressBar;
+    private DatePickerDialog datePickerDialog;
+    private SimpleDateFormat dateFormatter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +60,7 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
         progressBar = findViewById(R.id.progress_daftar_akun);
         btnDaftar.setOnClickListener(this);
         btnBack.setOnClickListener(this);
+        tglLahir.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -133,6 +141,24 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
         mUserReference.child(userId).setValue(user);
     }
 
+    private void showDateDialog(){
+
+        Calendar newCalendar = Calendar.getInstance();
+
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                dateFormatter = new SimpleDateFormat("dd-MMMM-yyyy");
+                tglLahir.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },1990, 1, 1);
+        datePickerDialog.show();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -143,6 +169,9 @@ public class DaftarAkunActivity extends AppCompatActivity implements View.OnClic
             case R.id.back_daftar_akun : {
                 finish();
                 break;
+            }
+            case R.id.tgl_lahir :{
+                showDateDialog();
             }
         }
     }

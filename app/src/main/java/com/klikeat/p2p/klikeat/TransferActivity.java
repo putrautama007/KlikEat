@@ -24,6 +24,7 @@ import com.klikeat.p2p.klikeat.model.MetodePembayaranModel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class TransferActivity extends AppCompatActivity implements View.OnClickListener {
     TextView tvTransferNominal,namaBank,noRek,waktuTransfer,poinText;
@@ -71,8 +72,11 @@ public class TransferActivity extends AppCompatActivity implements View.OnClickL
         progressBar.setVisibility(View.VISIBLE);
         getNextDay();
         metodePembayaranModel = gson.fromJson(util.preferences.getString("metode",""),MetodePembayaranModel.class);
-        tvTransferNominal.setText(util.preferences.getString("pembelian",""));
-        String newTransferNominal = tvTransferNominal.getText().toString().replaceAll("[^\\d.]+", "");
+        String newTransferNominal = util.preferences.getString("pembelian","").replaceAll("[^\\d.]+", "");
+        String newTransferNominal2 = util.preferences.getString("pembelian","").replaceAll("[^\\d,]+", "");
+        Random random = new Random();
+        int totalTransfer = Integer.parseInt(newTransferNominal2)+random.nextInt(999);
+        tvTransferNominal.setText(util.convertToIdr(totalTransfer));
         double setPoin =Double.parseDouble(newTransferNominal);
         int finalSetPoin = (int) setPoin;
         noRek.setText(metodePembayaranModel.getNomorRekeningBank());

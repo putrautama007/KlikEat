@@ -31,10 +31,11 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_back_keranjang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/circle_button"
             app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
     </android.support.v7.widget.Toolbar>
@@ -62,7 +63,6 @@
                 android:buttonTint="#ff7600"
                 android:text="Pilih Semua"
                 android:textColor="#757575"
-                android:checked="true"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Rp. 50000"
+                android:text="Rp.    "
                 android:textColor="#ff7600"
                 android:textSize="15sp"
                 android:textStyle="bold" />

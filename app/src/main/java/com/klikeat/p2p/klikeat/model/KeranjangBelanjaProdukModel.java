@@ -2,6 +2,7 @@ package com.klikeat.p2p.klikeat.model;
 
 public class KeranjangBelanjaProdukModel {
     String produkId,fotoPenjual, namaToko,fotoProduk,namaProduk,hargaProduk,jumlahPembelian;
+    Boolean setSelected;
 
 
     public KeranjangBelanjaProdukModel(String produkId, String fotoPenjual, String namaToko,
@@ -15,7 +16,28 @@ public class KeranjangBelanjaProdukModel {
         this.jumlahPembelian = jumlahPembelian;
     }
 
+    public KeranjangBelanjaProdukModel(String produkId, String fotoPenjual, String namaToko,
+                                       String fotoProduk, String namaProduk, String hargaProduk,
+                                       String jumlahPembelian, Boolean setSelected) {
+        this.produkId = produkId;
+        this.fotoPenjual = fotoPenjual;
+        this.namaToko = namaToko;
+        this.fotoProduk = fotoProduk;
+        this.namaProduk = namaProduk;
+        this.hargaProduk = hargaProduk;
+        this.jumlahPembelian = jumlahPembelian;
+        this.setSelected = setSelected;
+    }
+
     public KeranjangBelanjaProdukModel() {
+    }
+
+    public Boolean getSetSelected() {
+        return setSelected;
+    }
+
+    public void setSetSelected(Boolean setSelected) {
+        this.setSelected = setSelected;
     }
 
     public String getProdukId() {

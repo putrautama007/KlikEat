@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.klikeat.p2p.klikeat.adapter.MakananAdapter;
 import com.klikeat.p2p.klikeat.model.MakananModel;
@@ -28,11 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MakananActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView btnImgBack, btnCart;
+    ImageButton btnImgBack, btnCart;
     TextView toolbarName;
     EditText searchMakana;
     ImageButton btnSearch;
-    List<MakananModel> makananModels;
+    ArrayList<MakananModel> makananModels;
     MakananAdapter makananAdapter;
     RecyclerView rvMakanan;
     ProgressBar progressBar;
@@ -55,7 +56,7 @@ public class MakananActivity extends AppCompatActivity implements View.OnClickLi
         btnImgBack.setOnClickListener(this);
         btnCart.setOnClickListener(this);
 
-        makananModels = new ArrayList<>();
+
         mProdukInstance = FirebaseDatabase.getInstance();
         mProdukDatabase = mProdukInstance.getReference().child("produk");
         String getToolbarName = getIntent().getStringExtra("toolbarName");
@@ -67,9 +68,10 @@ public class MakananActivity extends AppCompatActivity implements View.OnClickLi
 
     private void loadDataMakanan(String kategori){
         progressBar.setVisibility(View.VISIBLE);
-        mProdukDatabase.orderByChild("kategori").equalTo(kategori).addValueEventListener(new ValueEventListener() {
+        mProdukDatabase.orderByChild("kategori").equalTo(kategori).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                makananModels = new ArrayList<>();
                 if (dataSnapshot != null) {
                     for (DataSnapshot tiapDataSnapshot : dataSnapshot.getChildren()) {
                         MakananModel makananModel = tiapDataSnapshot.getValue(MakananModel.class);
@@ -92,17 +94,17 @@ public class MakananActivity extends AppCompatActivity implements View.OnClickLi
 
     private void loadDataMakananBySearch(String namaMakanan){
         progressBar.setVisibility(View.VISIBLE);
-        mProdukDatabase.orderByChild("nama_produk").startAt(namaMakanan).endAt(namaMakanan+"\uf8ff").addValueEventListener(new ValueEventListener() {
+        Query searchQuerry = mProdukDatabase.orderByChild("nama_produk").equalTo(namaMakanan);
+        searchQuerry.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                makananModels = new ArrayList<>();
                 if (dataSnapshot != null) {
+                    makananModels.clear();
                     for (DataSnapshot tiapDataSnapshot : dataSnapshot.getChildren()) {
                         MakananModel makananModel = tiapDataSnapshot.getValue(MakananModel.class);
                         makananModels.add(makananModel);
                     }
-                    rvMakanan.setLayoutManager(new LinearLayoutManager(MakananActivity.this, LinearLayoutManager.VERTICAL, false));
-                    makananAdapter = new MakananAdapter(MakananActivity.this, makananModels);
-                    rvMakanan.setAdapter(makananAdapter);
                     makananAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.INVISIBLE);
                 }

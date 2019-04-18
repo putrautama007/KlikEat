@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class PenilaianActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnSemua,btnPenilaian1,btnPenilaian2,btnPenilaian3,btnPenilaian4,btnPenilaian5;
-    ImageView btnBack;
+    ImageButton btnBack;
     RecyclerView rvUlasanDetail;
     private DatabaseReference mProdukDetailDatabase;
     private FirebaseDatabase mProdukDetailInstance;
@@ -59,14 +60,14 @@ public class PenilaianActivity extends AppCompatActivity implements View.OnClick
         btnBack.setOnClickListener(this);
 
         mProdukDetailInstance = FirebaseDatabase.getInstance();
-        mProdukDetailDatabase = mProdukDetailInstance.getReference().child("produk");
+        mProdukDetailDatabase = mProdukDetailInstance.getReference().child("ulasan");
 
         loadUlasan(produkId);
     }
 
     private void loadUlasan(String id){
         progressBar.setVisibility(View.VISIBLE);
-        mProdukDetailDatabase.child(id).child("ulasan").addValueEventListener(new ValueEventListener() {
+        mProdukDetailDatabase.orderByChild("produk_id").equalTo(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ulasanModels = new ArrayList<>();
@@ -116,15 +117,17 @@ public class PenilaianActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-    private void loadUlasanBerdsarkanBintang(String id,String bintang){
-        mProdukDetailDatabase.child(id).child("ulasan").orderByChild("ratingProduk").equalTo(bintang).addValueEventListener(new ValueEventListener() {
+    private void loadUlasanBerdsarkanBintang(String id, final String bintang){
+        mProdukDetailDatabase.orderByChild("produk_id").equalTo(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ulasanModels = new ArrayList<>();
                 if (dataSnapshot != null) {
                     for (DataSnapshot tiapDataSnapshot : dataSnapshot.getChildren()) {
                         UlasanModel ulasanModel = tiapDataSnapshot.getValue(UlasanModel.class);
-                        ulasanModels.add(ulasanModel);
+                        if (ulasanModel.ratingProduk.equals(bintang)){
+                            ulasanModels.add(ulasanModel);
+                        }
                     }
                     rvUlasanDetail.setLayoutManager(new LinearLayoutManager(PenilaianActivity.this, LinearLayoutManager.VERTICAL, false));
                     ulasanProdukAdapter = new UlasanProdukDetailAdapter(PenilaianActivity.this, ulasanModels);

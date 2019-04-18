@@ -15,32 +15,63 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".TransferActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".PembayaranActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CheckOutActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".KeranjangActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".PenilaianActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DetailMakananActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ChangeAlamatActivity"></activity>
+        <activity android:name=".ChangePasswordActivity" />
+        <activity
+            android:name=".CommentUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UlasanUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GiveFeedBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetailOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TransferActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PembayaranActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CheckOutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".KeranjangActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PenilaianActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetailMakananActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DaftarAkunActivity"
             android:label="@string/title_activity_daftar_akun"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RegisterActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".EditProfileActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,9 +81,11 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" />
-        <activity android:name=".MakananActivity"
-            android:windowSoftInputMode="stateUnchanged"/>
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MakananActivity"
+            android:windowSoftInputMode="stateUnchanged" />
     </application>
 
 </manifest>

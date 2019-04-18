@@ -1,26 +1,54 @@
 package com.klikeat.p2p.klikeat.model;
 
 public class PembelianModel {
-    String fotoToko, namaToko,namaProduk,fotoProduk,jumlahProduk,hargaProduk,hargaPengiriman,catatan,
-            subtotal,status,produkId;
+    String fotoToko, namaToko,namaProduk,fotoProduk, jumlahPembelian,hargaProduk,hargaPengiriman,catatan,
+            subtotal,status,produkId,jasaPengiriaman,lamaPengiriman,produk_id;
 
     public PembelianModel(String fotoToko, String namaToko, String namaProduk, String fotoProduk,
-                          String jumlahProduk, String hargaProduk, String hargaPengiriman,
-                          String catatan, String subtotal, String status, String produkId) {
+                          String jumlahPembelian, String hargaProduk, String hargaPengiriman,
+                          String catatan, String subtotal, String status, String produkId,
+                          String jasaPengiriaman, String lamaPengiriman, String produk_id) {
         this.fotoToko = fotoToko;
         this.namaToko = namaToko;
         this.namaProduk = namaProduk;
         this.fotoProduk = fotoProduk;
-        this.jumlahProduk = jumlahProduk;
+        this.jumlahPembelian = jumlahPembelian;
         this.hargaProduk = hargaProduk;
         this.hargaPengiriman = hargaPengiriman;
         this.catatan = catatan;
         this.subtotal = subtotal;
         this.status = status;
         this.produkId = produkId;
+        this.jasaPengiriaman = jasaPengiriaman;
+        this.lamaPengiriman = lamaPengiriman;
+        this.produk_id = produk_id;
     }
 
     public PembelianModel() {
+    }
+
+    public String getProduk_id() {
+        return produk_id;
+    }
+
+    public void setProduk_id(String produk_id) {
+        this.produk_id = produk_id;
+    }
+
+    public String getJasaPengiriaman() {
+        return jasaPengiriaman;
+    }
+
+    public void setJasaPengiriaman(String jasaPengiriaman) {
+        this.jasaPengiriaman = jasaPengiriaman;
+    }
+
+    public String getLamaPengiriman() {
+        return lamaPengiriman;
+    }
+
+    public void setLamaPengiriman(String lamaPengiriman) {
+        this.lamaPengiriman = lamaPengiriman;
     }
 
     public String getProdukId() {
@@ -71,12 +99,12 @@ public class PembelianModel {
         this.fotoProduk = fotoProduk;
     }
 
-    public String getJumlahProduk() {
-        return jumlahProduk;
+    public String getJumlahPembelian() {
+        return jumlahPembelian;
     }
 
-    public void setJumlahProduk(String jumlahProduk) {
-        this.jumlahProduk = jumlahProduk;
+    public void setJumlahPembelian(String jumlahPembelian) {
+        this.jumlahPembelian = jumlahPembelian;
     }
 
     public String getHargaProduk() {

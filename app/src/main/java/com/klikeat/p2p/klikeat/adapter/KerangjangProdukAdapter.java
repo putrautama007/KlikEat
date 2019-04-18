@@ -7,13 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,7 +22,6 @@ import com.klikeat.p2p.klikeat.util.RoundedCornersTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class KerangjangProdukAdapter extends RecyclerView.Adapter<KerangjangProdukAdapter.ViewHolder> {
     int jumlah = 0;
@@ -36,11 +32,14 @@ public class KerangjangProdukAdapter extends RecyclerView.Adapter<KerangjangProd
     Util util;
     Context context;
     ArrayList<KeranjangBelanjaProdukModel> keranjangBelanjaProdukModelList;
+    AppCompatCheckBox checkBox;
 
     public KerangjangProdukAdapter(Context context, ArrayList<KeranjangBelanjaProdukModel> keranjangBelanjaProdukModelList) {
         this.context = context;
         this.keranjangBelanjaProdukModelList = keranjangBelanjaProdukModelList;
     }
+
+
 
     @NonNull
     @Override
@@ -65,48 +64,83 @@ public class KerangjangProdukAdapter extends RecyclerView.Adapter<KerangjangProd
         viewHolder.namaProduk.setText(keranjangBelanjaProdukModelList.get(i).getNamaProduk());
         viewHolder.hargaProduk.setText(util.convertToIdr(Integer.parseInt(keranjangBelanjaProdukModelList.get(i).getHargaProduk())));
         viewHolder.jumlahProduk.setText(keranjangBelanjaProdukModelList.get(i).getJumlahPembelian());
-        viewHolder.btnMinus.setOnClickListener(new View.OnClickListener() {
+        viewHolder.jumlahProduk.setText("0");
+        viewHolder.checkBoxProduk.setChecked(keranjangBelanjaProdukModelList.get(i).getSetSelected());
+        viewHolder.checkBoxProduk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (jumlah>0) {
-                    jumlah--;
-                    mUserDatabase.child(userId).child("pembelian")
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    keranjangBelanjaProdukModelList.get(i).setSetSelected(true);
+                    mUserDatabase.child(userId).child("BarangDiBeli")
                             .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
-                            .child("jumlahProduk").setValue(String.valueOf(jumlah));
+                            .setValue(keranjangBelanjaProdukModelList.get(i));
+                    mUserDatabase.child(userId).child("BarangDiBeli")
+                            .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
+                            .child("jumlahPembelian").setValue("0");
+                    viewHolder.btnMinus.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (keranjangBelanjaProdukModelList.get(i).getSetSelected() != false) {
+                                if (jumlah > 0) {
+                                    jumlah--;
+                                    mUserDatabase.child(userId).child("BarangDiBeli")
+                                            .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
+                                            .child("jumlahPembelian").setValue(String.valueOf(jumlah));
 
+                                    mUserDatabase.child(userId).child("keranjang")
+                                            .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
+                                            .child("jumlahProduk").setValue(String.valueOf(jumlah));
+
+                                    viewHolder.jumlahProduk.setText("" + jumlah);
+                                }
+                            }
+                        }
+                    });
+                    viewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (keranjangBelanjaProdukModelList.get(i).getSetSelected() != false) {
+                                jumlah++;
+                                mUserDatabase.child(userId).child("BarangDiBeli")
+                                        .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
+                                        .child("jumlahPembelian").setValue(String.valueOf(jumlah));
+
+                                mUserDatabase.child(userId).child("keranjang")
+                                        .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
+                                        .child("jumlahProduk").setValue(String.valueOf(jumlah));
+
+                                viewHolder.jumlahProduk.setText("" + jumlah);
+                            }
+                        }
+                    });
+                    viewHolder.btnDeleteItem.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Query deleteKeranjangItem = mUserDatabase.child(userId).child("keranjang")
+                                    .child(keranjangBelanjaProdukModelList.get(i).getProdukId());
+                            deleteKeranjangItem.getRef().removeValue();
+                            Query deleteKeranjang = mUserDatabase.child(userId).child("BarangDiBeli")
+                                    .child(keranjangBelanjaProdukModelList.get(i).getProdukId());
+                            deleteKeranjang.getRef().removeValue();
+                            removeAt(i);
+                        }
+                    });
+                }else {
+                    keranjangBelanjaProdukModelList.get(i).setSetSelected(false);
+                    Query deleteKeranjangItem = mUserDatabase.child(userId).child("BarangDiBeli")
+                            .child(keranjangBelanjaProdukModelList.get(i).getProdukId());
                     mUserDatabase.child(userId).child("keranjang")
                             .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
-                            .child("jumlahPembelian").setValue(String.valueOf(jumlah));
+                            .child("jumlahProduk").setValue("0");
+                    viewHolder.jumlahProduk.setText("0");
+                    deleteKeranjangItem.getRef().removeValue();
 
-                    viewHolder.jumlahProduk.setText(""+jumlah);
                 }
             }
         });
-        viewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumlah++;
-                mUserDatabase.child(userId).child("pembelian")
-                        .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
-                        .child("jumlahProduk").setValue(String.valueOf(jumlah));
 
-                mUserDatabase.child(userId).child("keranjang")
-                        .child(keranjangBelanjaProdukModelList.get(i).getProdukId())
-                        .child("jumlahPembelian").setValue(String.valueOf(jumlah));
-
-                viewHolder.jumlahProduk.setText(""+jumlah);
-            }
-        });
-        viewHolder.btnDeleteItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Query deleteKeranjangItem = mUserDatabase.child(userId).child("keranjang")
-                        .child(keranjangBelanjaProdukModelList.get(i).getProdukId());
-                deleteKeranjangItem.getRef().removeValue();
-                removeAt(i);
-            }
-        });
     }
+
 
     public void removeAt(int position) {
         keranjangBelanjaProdukModelList.remove(position);
@@ -120,7 +154,7 @@ public class KerangjangProdukAdapter extends RecyclerView.Adapter<KerangjangProd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        AppCompatCheckBox checkBoxProduk,checkBoxToko;
+        AppCompatCheckBox checkBoxProduk;
         ImageView ivProduk,ivToko;
         TextView namaProduk,hargaProduk,jumlahProduk,namaToko;
         ImageButton btnMinus,btnPlus,btnDeleteItem;
@@ -133,7 +167,6 @@ public class KerangjangProdukAdapter extends RecyclerView.Adapter<KerangjangProd
             jumlahProduk = itemView.findViewById(R.id.tv_jumlah_produk);
             btnMinus = itemView.findViewById(R.id.btn_minus);
             btnPlus = itemView.findViewById(R.id.btn_plus);
-            checkBoxToko = itemView.findViewById(R.id.checkbox_keranjang_toko);
             ivToko = itemView.findViewById(R.id.iv_profile_penjual_keranjang);
             namaToko = itemView.findViewById(R.id.nama_penjual);
             btnDeleteItem = itemView.findViewById(R.id.btn_delete_all_produk);

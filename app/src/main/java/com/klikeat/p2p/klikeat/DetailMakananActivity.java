@@ -50,8 +50,8 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
     Button btnBeliSekarang;
     RecyclerView rvUlasan;
 
-    DatabaseReference mProdukDetailDatabase, mUserDatabase;
-    FirebaseDatabase mProdukDetailInstance, mUserIntansce;
+    DatabaseReference mProdukDetailDatabase, mUserDatabase,mUlasanDatabase;
+    FirebaseDatabase mProdukDetailInstance, mUserIntansce,mUlasanInstance;
     ArrayList<UlasanModel> ulasanModels;
     UlasanProdukAdapter ulasanProdukAdapter;
     FirebaseAuth mAuth;
@@ -75,6 +75,8 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
         mProdukDetailDatabase = mProdukDetailInstance.getReference().child("produk");
         mUserIntansce = FirebaseDatabase.getInstance();
         mUserDatabase = mUserIntansce.getReference().child("user");
+        mUlasanInstance = FirebaseDatabase.getInstance();
+        mUlasanDatabase = mUlasanInstance.getReference("ulasan");
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getUid();
         String makananData = getIntent().getStringExtra("produkData");
@@ -177,32 +179,34 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
         });
     }
 
-    private void loadUlasan(String id) {
-        mProdukDetailDatabase.child(id).child("ulasan").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ulasanModels = new ArrayList<>();
-                if (dataSnapshot != null) {
-                    for (DataSnapshot tiapDataSnapshot : dataSnapshot.getChildren()) {
-                        UlasanModel ulasanModel = tiapDataSnapshot.getValue(UlasanModel.class);
-                        ulasanModels.add(ulasanModel);
+    private void loadUlasan(String produkId) {
+        if (produkId != null) {
+            mUlasanDatabase.orderByChild("produk_id").equalTo(produkId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ulasanModels = new ArrayList<>();
+                    if (dataSnapshot != null) {
+                        for (DataSnapshot tiapDataSnapshot : dataSnapshot.getChildren()) {
+                            UlasanModel ulasanModel = tiapDataSnapshot.getValue(UlasanModel.class);
+                            ulasanModels.add(ulasanModel);
+                        }
+                        rvUlasan.setLayoutManager(new LinearLayoutManager(DetailMakananActivity.this, LinearLayoutManager.VERTICAL, false));
+                        ulasanProdukAdapter = new UlasanProdukAdapter(DetailMakananActivity.this, ulasanModels);
+                        rvUlasan.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+                        rvUlasan.setAdapter(ulasanProdukAdapter);
+                        rvUlasan.smoothScrollBy(0, 100);
+                        ulasanProdukAdapter.notifyDataSetChanged();
+                    } else {
+
                     }
-                    rvUlasan.setLayoutManager(new LinearLayoutManager(DetailMakananActivity.this, LinearLayoutManager.VERTICAL, false));
-                    ulasanProdukAdapter = new UlasanProdukAdapter(DetailMakananActivity.this, ulasanModels);
-                    rvUlasan.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-                    rvUlasan.setAdapter(ulasanProdukAdapter);
-                    rvUlasan.smoothScrollBy(0, 100);
-                    ulasanProdukAdapter.notifyDataSetChanged();
-                } else {
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+            });
+        }
     }
 
 
@@ -253,11 +257,9 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
                 break;
             }
             case R.id.btn_komen: {
-                if (mAuth.getCurrentUser() != null) {
-
-                } else {
-                    startActivity(new Intent(DetailMakananActivity.this, LoginActivity.class));
-                }
+                intent = new Intent(this, CommentActivity.class);
+                intent.putExtra("produkId", makananModel.produk_id);
+                startActivity(intent);
                 break;
             }
             case R.id.ll_lihat_ulasan: {
@@ -277,7 +279,7 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
                                 String namaProduk, String hargaProduk,
                                 String jumlahPembelian) {
         keranjangBelanjaProdukModel = new KeranjangBelanjaProdukModel(produkId,fotoPenjual,
-                namaToko,fotoProduk,namaProduk,hargaProduk,jumlahPembelian);
+                namaToko,fotoProduk,namaProduk,hargaProduk,jumlahPembelian,false);
         mUserDatabase.child(userId).child("keranjang").child(produkId).setValue(keranjangBelanjaProdukModel);
         snackbar = Snackbar.make(constraintLayout, "Ditambah kedalam keranjang", Snackbar.LENGTH_SHORT);
         snackbar.show();
@@ -288,8 +290,9 @@ public class DetailMakananActivity extends AppCompatActivity implements View.OnC
                               String jumlahProduk, String hargaProduk, String hargaPengiriman,
                               String catatan, String subtotal,String produkId){
         pembelianModel = new PembelianModel(fotoToko,namaToko,namaProduk,fotoProduk,jumlahProduk,
-                hargaProduk,hargaPengiriman,catatan,subtotal,"Menunggu pembayaran",produkId);
-        mUserDatabase.child(userId).child("pembelian").child(produkId).setValue(pembelianModel);
+                hargaProduk,hargaPengiriman,catatan,subtotal,"Menunggu pembayaran",produkId
+                ,"JNE Reguler","Dikirim dalam 1-3 hari",makananModel.produk_id);
+        mUserDatabase.child(userId).child("BarangDiBeli").child(produkId).setValue(pembelianModel);
     }
 
     private void addToFavorite(String fotoPrduk, String namaProduk, String namaPenjual, String produkId) {

@@ -71,7 +71,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:text="Rp 72.000"
                 android:textColor="@color/colorBlack"
                 android:textSize="30sp" />
 

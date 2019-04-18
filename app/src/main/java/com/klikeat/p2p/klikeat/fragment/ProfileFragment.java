@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -22,11 +23,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.klikeat.p2p.klikeat.CommentActivity;
+import com.klikeat.p2p.klikeat.CommentUserActivity;
 import com.klikeat.p2p.klikeat.KeranjangActivity;
 import com.klikeat.p2p.klikeat.LoginActivity;
+import com.klikeat.p2p.klikeat.OrderActivity;
 import com.klikeat.p2p.klikeat.R;
 import com.klikeat.p2p.klikeat.RegisterActivity;
 import com.klikeat.p2p.klikeat.SettingActivity;
+import com.klikeat.p2p.klikeat.UlasanUserActivity;
 
 import io.paperdb.Paper;
 
@@ -36,7 +41,7 @@ import io.paperdb.Paper;
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
-    ImageView ivSetting;
+    ImageButton ivSetting;
     Button login,register;
     Intent intent;
     TextView tvNama,tvPoin;
@@ -99,8 +104,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_setting: {
-                intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
+                if (mAuth.getCurrentUser() != null) {
+                    intent = new Intent(getActivity(), SettingActivity.class);
+                    startActivity(intent);
+                }
                 break;
             }
             case R.id.btn_login : {
@@ -114,16 +121,27 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 break;
             }
             case R.id.linear_keranjang :{
-                startActivity(new Intent(getActivity(), KeranjangActivity.class));
+                if (mAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(getActivity(), KeranjangActivity.class));
+                }
                 break;
             }
             case R.id.linear_komentarSaya:{
+                if (mAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(getActivity(), CommentUserActivity.class));
+                }
                 break;
             }
             case R.id.linear_order :{
+                if (mAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(getActivity(), OrderActivity.class));
+                }
                 break;
             }
             case R.id.linear_penilaianSaya:{
+                if (mAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(getActivity(), UlasanUserActivity.class));
+                }
                 break;
             }
         }

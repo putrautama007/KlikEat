@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -29,7 +30,7 @@ public class PembayaranActivity extends AppCompatActivity implements View.OnClic
     ArrayList<MetodePembayaranModel> metodePembayaranModels;
     DatabaseReference mTranferBankDatabase ,mTransferVirtualDatabase,mUserDatabase;
     FirebaseDatabase mTransferIntansce, mTransferVirtualIntansce,mUserIntansce;
-    ImageView btnBack;
+    ImageButton btnBack;
     String pembelianId,userId;
     Util util;
     FirebaseAuth mAuth;

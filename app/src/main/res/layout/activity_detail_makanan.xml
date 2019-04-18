@@ -33,10 +33,11 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_back_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/circle_button"
             app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
     </android.support.v7.widget.Toolbar>
@@ -450,7 +451,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/circle_button"
                     app:srcCompat="@drawable/ic_comment_black_24dp" />
 
                 <View
@@ -468,7 +469,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/circle_button"
                     app:srcCompat="@drawable/ic_shopping_cart_black_24dp" />
             </LinearLayout>
 

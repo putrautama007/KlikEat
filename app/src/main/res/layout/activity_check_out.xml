@@ -31,10 +31,11 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_back_check_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/circle_button"
             app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
     </android.support.v7.widget.Toolbar>
@@ -134,7 +135,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cv_address" />
+                app:layout_constraintTop_toBottomOf="@+id/cv_address"
+                tools:listitem="@layout/list_pembelian"/>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"

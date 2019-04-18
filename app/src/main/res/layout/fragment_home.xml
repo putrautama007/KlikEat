@@ -5,12 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background"
     tools:context=".fragment.HomeFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/gradient_color"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView3"
@@ -28,26 +41,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.synnapps.carouselview.CarouselView
-            android:id="@+id/carousel"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:strokeColor="#ff7600"
-            app:strokeWidth="2dp"
-            app:pageColor="#ff7600"
-            app:slideInterval="3000"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carousel"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:pageColor="#ff7600"
+                app:slideInterval="3000"
+                app:strokeColor="#ff7600"
+                app:strokeWidth="2dp" />
+        </android.support.constraint.ConstraintLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/carousel">
+            app:layout_constraintTop_toBottomOf="@+id/cl_carousel">
 
 
             <TextView
